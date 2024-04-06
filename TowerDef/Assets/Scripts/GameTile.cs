@@ -50,4 +50,9 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     {
         spawnRenderer.enabled = true;
     }
+
+    internal void SetPath(bool isPath)
+    {
+        spriteRenderer.color = isPath ? Color.yellow : originalColor;
+    }
 }

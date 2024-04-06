@@ -42,9 +42,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)&& TargetTile != null )
+        if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
         {
-            PathFinfing(spawnTile, TargetTile);
+            foreach(var t in gameTiles)
+            {
+                t.SetPath(false);
+            }
+
+            var path = PathFinfing(spawnTile, TargetTile);
+            var tile = TargetTile;
+
+            while(tile != null)
+            {
+                tile.SetPath(true);
+                tile = path[tile];
+            }
         }
     }
 
@@ -54,7 +66,7 @@ public class GameManager : MonoBehaviour
         var prev = new Dictionary<GameTile, GameTile>();
 
         var Q = new List<GameTile>();
-        
+
         foreach (var v in gameTiles)
         {
             dist.Add(v, 999);
@@ -66,10 +78,58 @@ public class GameManager : MonoBehaviour
 
         while (Q.Count > 0)
         {
+            GameTile u = null;
+            int minDistance = int.MaxValue;
+
+            foreach (var v in Q)
+            {
+                if (dist[v] < minDistance)
+                {
+                    minDistance = dist[v];
+                    u = v;
+                }
+
+            }
+
+            Q.Remove(u);
+
+            foreach (var v in FindNeighbor(u))
+            {
+                if(!Q.Contains(v) || v.IsBloced)
+                {
+                    continue;
+                }
+
+                int alt = dist[u] + 1;
+
+                if(alt < dist[v])
+                {
+                    dist[v] = alt;
+
+                    prev[v] = u;
+                }
+            }
 
         }
 
+        return prev;
 
+    }
+
+    private List<GameTile> FindNeighbor(GameTile u)
+    {
+        var result = new List<GameTile>();
+
+        if (u.X - 1 >= 0)
+        { result.Add(gameTiles[u.X - 1, u.Y]); }
+        if (u.X + 1 < ColCount)
+        { result.Add(gameTiles[u.X + 1, u.Y]); }
+        if (u.Y - 1 >= 0)
+        { result.Add(gameTiles[u.X, u.Y - 1]); }
+        if (u.Y + 1 < RowCount)
+        { result.Add(gameTiles[u.X, u.Y + 1]); }
+
+        return result;
     }
 
     IEnumerator SpawnEnemyCoroutine()
