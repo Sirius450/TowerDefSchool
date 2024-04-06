@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +11,8 @@ public class GameManager : MonoBehaviour
     private GameTile spawnTile;
     const int ColCount = 20;
     const int RowCount = 10;
+
+    public GameTile TargetTile { get; internal set; }
 
     private void Awake()
     {
@@ -21,6 +25,9 @@ public class GameManager : MonoBehaviour
                 var spawnPosition = new Vector3(x, y, 0);
                 var tile = Instantiate(gameTilePrefab, spawnPosition, Quaternion.identity);
                 gameTiles[x, y] = tile.GetComponent<GameTile>();
+                gameTiles[x, y].GM = this;
+                gameTiles[x, y].X = x;
+                gameTiles[x, y].Y = y;
                 if ((x + y) % 2 == 0)
                 {
                     gameTiles[x, y].TurnGrey();
@@ -31,6 +38,38 @@ public class GameManager : MonoBehaviour
         spawnTile = gameTiles[1, 7];
         spawnTile.SetEnemySpawn();
         StartCoroutine(SpawnEnemyCoroutine());
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space)&& TargetTile != null )
+        {
+            PathFinfing(spawnTile, TargetTile);
+        }
+    }
+
+    private Dictionary<GameTile, GameTile> PathFinfing(GameTile sourceTile, GameTile targetTile)
+    {
+        var dist = new Dictionary<GameTile, int>();
+        var prev = new Dictionary<GameTile, GameTile>();
+
+        var Q = new List<GameTile>();
+        
+        foreach (var v in gameTiles)
+        {
+            dist.Add(v, 999);
+            prev.Add(v, null);
+            Q.Add(v);
+        }
+
+        dist[sourceTile] = 0;
+
+        while (Q.Count > 0)
+        {
+
+        }
+
+
     }
 
     IEnumerator SpawnEnemyCoroutine()
