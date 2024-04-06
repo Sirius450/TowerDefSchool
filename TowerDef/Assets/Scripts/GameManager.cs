@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
     const int RowCount = 10;
 
     public GameTile TargetTile { get; internal set; }
-
+    List<GameTile> pathToGoal = new List<GameTile>();
     private void Awake()
     {
         gameTiles = new GameTile[ColCount, RowCount];
+        
 
         for (int x = 0; x < ColCount; x++)
         {
@@ -37,14 +38,13 @@ public class GameManager : MonoBehaviour
 
         spawnTile = gameTiles[1, 7];
         spawnTile.SetEnemySpawn();
-        StartCoroutine(SpawnEnemyCoroutine());
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
         {
-            foreach(var t in gameTiles)
+            foreach (var t in gameTiles)
             {
                 t.SetPath(false);
             }
@@ -52,11 +52,13 @@ public class GameManager : MonoBehaviour
             var path = PathFinfing(spawnTile, TargetTile);
             var tile = TargetTile;
 
-            while(tile != null)
+            while (tile != null)
             {
+                pathToGoal.Add(tile);
                 tile.SetPath(true);
                 tile = path[tile];
             }
+            StartCoroutine(SpawnEnemyCoroutine());
         }
     }
 
@@ -95,14 +97,14 @@ public class GameManager : MonoBehaviour
 
             foreach (var v in FindNeighbor(u))
             {
-                if(!Q.Contains(v) || v.IsBloced)
+                if (!Q.Contains(v) || v.IsBloced)
                 {
                     continue;
                 }
 
                 int alt = dist[u] + 1;
 
-                if(alt < dist[v])
+                if (alt < dist[v])
                 {
                     dist[v] = alt;
 
@@ -139,7 +141,8 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 yield return new WaitForSeconds(0.6f);
-                Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
+                var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
+                enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
             yield return new WaitForSeconds(2f);
         }
