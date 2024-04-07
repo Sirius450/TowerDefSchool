@@ -689,6 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameTilePrefab: {fileID: 6064064788169888742, guid: 464ed7ed4121f074cab5705a2cbd4c61, type: 3}
   enemyPrefab: {fileID: 1812623713565188647, guid: 0abe296bf59726b449e3f2109d65f4d7, type: 3}
+  player: {fileID: 203475563}
 --- !u!4 &2121067801
 Transform:
   m_ObjectHideFlags: 0

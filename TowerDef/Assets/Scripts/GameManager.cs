@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject gameTilePrefab;
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] Player player;
     GameTile[,] gameTiles;
     private GameTile spawnTile;
     const int ColCount = 20;
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gameTiles = new GameTile[ColCount, RowCount];
-        
+
 
         for (int x = 0; x < ColCount; x++)
         {
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
                 tile = path[tile];
             }
             StartCoroutine(SpawnEnemyCoroutine());
+
         }
     }
 
@@ -136,7 +138,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnEnemyCoroutine()
     {
-        while (true)
+        while (player.totalHp != 0)
         {
             for (int i = 0; i < 5; i++)
             {

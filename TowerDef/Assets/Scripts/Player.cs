@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text hpText;
     [SerializeField] int BaseHp;
 
-    private int totalHp;
+    internal int totalHp;
     public static int bonusHP = 0;
 
     private void Awake()
