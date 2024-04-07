@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
+    [SerializeField] int damege = 0;
     private Stack<GameTile> path = new Stack<GameTile>();
     internal void SetPath(List<GameTile> pathToGoal)
     {
@@ -38,6 +38,9 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            GameObject player = GameObject.Find("Player");
+            Player healt = player.GetComponent<Player>();
+            healt.OnTakeDamege(damege);
             Destroy(gameObject);
         }
     }

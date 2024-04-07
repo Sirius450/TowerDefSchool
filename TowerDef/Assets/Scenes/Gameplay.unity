@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpText: {fileID: 339386974}
+  BaseHp: 10
 --- !u!4 &203475564
 Transform:
   m_ObjectHideFlags: 0
