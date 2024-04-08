@@ -6,7 +6,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int damege = 0;
+
+    public static HashSet<Enemy> allEnemies = new HashSet<Enemy>();
+
     private Stack<GameTile> path = new Stack<GameTile>();
+
     internal void SetPath(List<GameTile> pathToGoal)
     {
         path.Clear();
@@ -19,6 +23,8 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        allEnemies.Add(this);
+
         //StartCoroutine(DirectionCoroutine());
     }
 
@@ -41,6 +47,7 @@ public class Enemy : MonoBehaviour
             GameObject player = GameObject.Find("Player");
             Player healt = player.GetComponent<Player>();
             healt.OnTakeDamege(damege);
+            allEnemies.Remove(this);
             Destroy(gameObject);
         }
     }
