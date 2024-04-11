@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int damege = 0;
+    [SerializeField] private int damege = 0;
+    [SerializeField] private int PV = 3;
+    internal int currentPV;
 
     public static HashSet<Enemy> allEnemies = new HashSet<Enemy>();
 
@@ -24,22 +26,22 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         allEnemies.Add(this);
-
-        //StartCoroutine(DirectionCoroutine());
+        currentPV = PV;
+     
     }
 
     private void Update()
     {
         if (path.Count > 0)
         {
-            Vector3 desPos = path.Peek().transform.position; 
+            Vector3 desPos = path.Peek().transform.position;
 
-            transform.position = Vector3.MoveTowards(transform.position, desPos, 2* Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, desPos, 2 * Time.deltaTime);
 
 
             if (Vector3.Distance(transform.position, desPos) < 0.1f)
             {
-                path.Pop();   
+                path.Pop();
             }
         }
         else
@@ -52,15 +54,25 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //IEnumerator DirectionCoroutine()
-    //{
-    //    yield return new WaitForSeconds(8f);
-    //    direction = Vector3.down;
-    //    yield return new WaitForSeconds(3f);
-    //    direction = Vector3.left;
-    //    yield return new WaitForSeconds(6f);
-    //    direction = Vector3.up;
-    //    yield return new WaitForSeconds(30f);
-    //    Destroy(gameObject);
-    //}
+
+    public void OnTakeDamage(int damege)
+    {
+        currentPV -= damege;
+
+        if(currentPV <= 0)
+        {
+            Destroy(gameObject);
+            allEnemies.Remove(this);
+        }
+
+    }
+
+    public void Onheal(int heal) 
+    {
+        currentPV += heal;
+
+        if(currentPV >= PV) 
+        { currentPV = PV; }
+    }
+
 }

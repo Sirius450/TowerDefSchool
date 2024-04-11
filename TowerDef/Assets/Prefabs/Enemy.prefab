@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damege: 1
+  PV: 3
 --- !u!1 &6913478966812639091
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,9 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     private LineRenderer lineRenderer;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
+    private bool shoot;
+    [SerializeField] private int damage;
+    [SerializeField] private int range;
 
     public GameManager GM { get; internal set; }
     public int X { get; internal set; }
@@ -25,39 +29,21 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         turretRenderer.enabled = false;
-        originalColor = spriteRenderer.color;   
+        originalColor = spriteRenderer.color;
     }
 
     private void Update()
     {
         if (turretRenderer.enabled)
         {
-            Enemy target = null;
-            foreach (var enemy in Enemy.allEnemies)
-            {
-                if (Vector3.Distance(transform.position, enemy.transform.position) < 2)
-                {
-                    target = enemy;
-                    break;
-                }
-            }
-
-            if (target != null)
-            {
-                lineRenderer.SetPosition(1, target.transform.position);
-                lineRenderer.enabled = true;
-            }
-            else
-            {
-                lineRenderer.enabled = false;
-            }
+            OnAttack();
         }
     }
 
     internal void TurnGrey()
     {
         spriteRenderer.color = Color.gray;
-        originalColor = spriteRenderer.color;   
+        originalColor = spriteRenderer.color;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -85,5 +71,40 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     internal void SetPath(bool isPath)
     {
         spriteRenderer.color = isPath ? Color.yellow : originalColor;
+    }
+
+    private void OnAttack()
+    {
+        Enemy target = null;
+        foreach (var enemy in Enemy.allEnemies)
+        {
+            if (Vector3.Distance(transform.position, enemy.transform.position) < range)
+            {
+                target = enemy;
+                break;
+            }
+        }
+
+        if (target != null)
+        {
+            lineRenderer.SetPosition(1, target.transform.position);
+            lineRenderer.enabled = true;
+            if(!shoot)
+            {
+                StartCoroutine(OnShoot(target));
+            }
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+        }
+    }
+
+    IEnumerator OnShoot(Enemy target)
+    {
+        shoot = true;
+        target.OnTakeDamage(damage);
+        yield return new WaitForSeconds(0.5f);
+        shoot = false;
     }
 }
