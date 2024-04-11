@@ -1,0 +1,21 @@
+Patriot Defenders of Freedom (PDF)
+	-robot kamikaze
+		commence a la fin du path
+		et explose au contacte d'un ennemie
+	-Tourel gateline
+	-mine IEM
+	-Tourel mortier
+	-Tourel antiaérienne
+		-baterie de misile
+	-Nuke (freedom/Democratic argument)
+		dernière amélioration
+
+
+
+Comrades of Silicon and Steel (CSS)
+	-petit camarade robot
+	-peti hover
+	-gros camarade robot
+	-Heal camarade robot
+	-Zeplin
+	
