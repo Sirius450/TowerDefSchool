@@ -208,19 +208,11 @@ public class GameManager : MonoBehaviour
         {
             return 0;
         }
-<<<<<<< Updated upstream
-        else if(i > 7&& i <= 11) // heavy Camarade Robot
-        {
-            return 1;
-        }
-        else if(i > 11)
-=======
         else if (i > 7 && i <= 11) // heavy Camarade Robot
         {
             return 1;
         }
         else if (i > 11)
->>>>>>> Stashed changes
         {
             return 2;
         }
