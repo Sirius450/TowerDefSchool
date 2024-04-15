@@ -152,15 +152,19 @@ public class GameManager : MonoBehaviour
 
     private int RNGRobot()
     {
-        int i = UnityEngine.Random.Range(0, 11);
+        int i = UnityEngine.Random.Range(0, 15);
 
         if(i <= 7)  //light Camarade Robot
         {
             return 0;
         }
-        else if(i > 7) // heavy Camarade Robot
+        else if(i > 7&& i <= 11) // heavy Camarade Robot
         {
             return 1;
+        }
+        else if(i > 11)
+        {
+            return 2;
         }
         else
         {

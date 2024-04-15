@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpText: {fileID: 339386974}
-  BaseHp: 20
+  BaseHp: 9999
 --- !u!4 &203475564
 Transform:
   m_ObjectHideFlags: 0
@@ -691,6 +691,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 1812623713565188647, guid: 0abe296bf59726b449e3f2109d65f4d7, type: 3}
   - {fileID: 1812623713565188647, guid: c002af514a705544ab89ac5d4b7fb8ae, type: 3}
+  - {fileID: 1812623713565188647, guid: 61971e3f25b2b30478d1eeacdeecc71a, type: 3}
   player: {fileID: 203475563}
 --- !u!4 &2121067801
 Transform:

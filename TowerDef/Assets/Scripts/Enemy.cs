@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int speed = 2;
+    [SerializeField] private float speed = 2;
     [SerializeField] private int damage = 0;
     [SerializeField] private float PV = 3;
     [SerializeField] internal float currentPV;
     [SerializeField] private GameObject HpBar;
+
+    [SerializeField] private bool heal;
+    [SerializeField] private int range;
+    [SerializeField] private int healAmount;
+    private bool shoot;
+    private LineRenderer lineRenderer;
 
     private Vector3 maxSizeHpBar;
     private Vector3 curentSize;
@@ -33,6 +39,12 @@ public class Enemy : MonoBehaviour
         currentPV = PV;
         maxSizeHpBar = HpBar.transform.localScale;
         curentSize = HpBar.transform.localScale;
+
+        if (heal)
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer.enabled = false;
+        }
 
     }
 
@@ -58,8 +70,53 @@ public class Enemy : MonoBehaviour
             allEnemies.Remove(this);
             Destroy(gameObject);
         }
+
+        if (heal)
+        {
+            Heal();
+        }
     }
 
+    private void Heal()
+    {
+        Enemy target = null;
+        float prevPv =999;
+        foreach (var enemy in allEnemies)
+        {
+            if (Vector3.Distance(transform.position, enemy.transform.position) < range && enemy.gameObject != this.gameObject)
+            {
+                if (enemy.currentPV < prevPv)
+                {
+                    target = enemy;
+                    prevPv = target.currentPV;
+                }            
+            }
+        }
+
+        if (target != null)
+        {
+            lineRenderer.SetPosition(1, target.transform.position);
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.enabled = true;
+            if (!shoot)
+            {
+                StartCoroutine(OnHeal(target));
+            }
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+        }
+    }
+
+    IEnumerator OnHeal(Enemy target)
+    {
+        shoot = true;
+        target.OntakeHeal(healAmount);
+        Debug.Log(target.ToString());
+        yield return new WaitForSeconds(0.5f);
+        shoot = false;
+    }
 
     public void OnTakeDamage(int damege)
     {
@@ -75,7 +132,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void Onheal(int heal)
+    public void OntakeHeal(int heal)
     {
         currentPV += heal;
         AdjustHpBar();
