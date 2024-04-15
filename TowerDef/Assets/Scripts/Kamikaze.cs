@@ -7,7 +7,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Kamikaze : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D explosionRange;
     [SerializeField] internal float speed;
     [SerializeField] internal int damage;
     [SerializeField] internal float range;
@@ -16,11 +15,6 @@ public class Kamikaze : MonoBehaviour
     public List<Enemy> enemyList = new List<Enemy>();
 
     private Stack<GameTile> path = new Stack<GameTile>();
-    private void Awake()
-    {
-        explosionRange.radius = range;
-        
-    }
 
     internal void SetPath(List<GameTile> pathToGoal)
     {
