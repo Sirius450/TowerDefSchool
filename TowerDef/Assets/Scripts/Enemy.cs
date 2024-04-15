@@ -6,9 +6,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int damege = 0;
-    [SerializeField] private int PV = 3;
-    internal int currentPV;
+    [SerializeField] private float PV = 3;
+    [SerializeField] internal float currentPV;
+    [SerializeField] private GameObject HpBar;
 
+    private Vector3 maxSizeHpBar;
+    private Vector3 curentSize;
     public static HashSet<Enemy> allEnemies = new HashSet<Enemy>();
 
     private Stack<GameTile> path = new Stack<GameTile>();
@@ -27,7 +30,9 @@ public class Enemy : MonoBehaviour
     {
         allEnemies.Add(this);
         currentPV = PV;
-     
+        maxSizeHpBar = HpBar.transform.localScale;
+        curentSize = HpBar.transform.localScale;
+
     }
 
     private void Update()
@@ -58,8 +63,10 @@ public class Enemy : MonoBehaviour
     public void OnTakeDamage(int damege)
     {
         currentPV -= damege;
+        AdjustHpBar();
 
-        if(currentPV <= 0)
+
+        if (currentPV <= 0)
         {
             Destroy(gameObject);
             allEnemies.Remove(this);
@@ -67,12 +74,20 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void Onheal(int heal) 
+    public void Onheal(int heal)
     {
         currentPV += heal;
+        AdjustHpBar();
 
-        if(currentPV >= PV) 
+        if (currentPV >= PV)
         { currentPV = PV; }
+    }
+
+    private void AdjustHpBar()
+    {
+        curentSize.x = (currentPV / PV) * maxSizeHpBar.x;
+
+        HpBar.transform.localScale = curentSize;
     }
 
 }
