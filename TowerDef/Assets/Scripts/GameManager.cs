@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject UI;
+
     [SerializeField] GameObject gameTilePrefab;
     [SerializeField] List<GameObject> enemyPrefab = new List<GameObject>();
     [SerializeField] Player player;
@@ -15,10 +19,24 @@ public class GameManager : MonoBehaviour
 
     public GameTile TargetTile { get; internal set; }
     List<GameTile> pathToGoal = new List<GameTile>();
+
+    public static GameManager Singleton;
+
     private void Awake()
     {
-        gameTiles = new GameTile[ColCount, RowCount];
+        //Creation of singleton
+        if (Singleton == null)
+        {
+            Singleton = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
 
+
+        gameTiles = new GameTile[ColCount, RowCount];
 
         for (int x = 0; x < ColCount; x++)
         {
@@ -60,8 +78,41 @@ public class GameManager : MonoBehaviour
                 tile = path[tile];
             }
             StartCoroutine(SpawnEnemyCoroutine());
-
         }
+
+        //pause the game
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            OnPauseMenu();
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            pauseMenu.SetActive(false);
+        }
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            UI.SetActive(true);
+        }
+    }
+
+    public void OnPauseMenu()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            if (pauseMenu.active == false)
+            {
+                pauseMenu.SetActive(true);
+            }
+            else
+            {
+                pauseMenu.SetActive(false);
+            }
+        }
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private Dictionary<GameTile, GameTile> PathFinfing(GameTile sourceTile, GameTile targetTile)
@@ -117,7 +168,6 @@ public class GameManager : MonoBehaviour
         }
 
         return prev;
-
     }
 
     private List<GameTile> FindNeighbor(GameTile u)
@@ -154,15 +204,23 @@ public class GameManager : MonoBehaviour
     {
         int i = UnityEngine.Random.Range(0, 15);
 
-        if(i <= 7)  //light Camarade Robot
+        if (i <= 7)  //light Camarade Robot
         {
             return 0;
         }
+<<<<<<< Updated upstream
         else if(i > 7&& i <= 11) // heavy Camarade Robot
         {
             return 1;
         }
         else if(i > 11)
+=======
+        else if (i > 7 && i <= 11) // heavy Camarade Robot
+        {
+            return 1;
+        }
+        else if (i > 11)
+>>>>>>> Stashed changes
         {
             return 2;
         }
@@ -170,7 +228,5 @@ public class GameManager : MonoBehaviour
         {
             return 0;
         }
-
-
     }
 }
