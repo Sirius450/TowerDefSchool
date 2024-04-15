@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int damege = 0;
+    [SerializeField] private int speed = 2;
+    [SerializeField] private int damage = 0;
     [SerializeField] private float PV = 3;
     [SerializeField] internal float currentPV;
     [SerializeField] private GameObject HpBar;
@@ -41,7 +42,7 @@ public class Enemy : MonoBehaviour
         {
             Vector3 desPos = path.Peek().transform.position;
 
-            transform.position = Vector3.MoveTowards(transform.position, desPos, 2 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, desPos, speed * Time.deltaTime);
 
 
             if (Vector3.Distance(transform.position, desPos) < 0.1f)
@@ -53,7 +54,7 @@ public class Enemy : MonoBehaviour
         {
             GameObject player = GameObject.Find("Player");
             Player healt = player.GetComponent<Player>();
-            healt.OnTakeDamege(damege);
+            healt.OnTakeDamege(damage);
             allEnemies.Remove(this);
             Destroy(gameObject);
         }

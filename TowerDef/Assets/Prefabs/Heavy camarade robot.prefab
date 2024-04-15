@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8740404442034967821}
   - component: {fileID: 3234601856786858849}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Heavy camarade robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad85954ad93e344e9c0ada0549b7989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damege: 1
-  PV: 3
+  speed: 1
+  damage: 2
+  PV: 10
+  currentPV: 0
   HpBar: {fileID: 2679940899045069508}
 --- !u!1 &2080869428150858118
 GameObject:
@@ -409,7 +411,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.4768412, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

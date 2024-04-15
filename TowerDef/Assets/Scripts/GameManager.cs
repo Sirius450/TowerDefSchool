@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject gameTilePrefab;
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] List<GameObject> enemyPrefab = new List<GameObject>();
     [SerializeField] Player player;
     GameTile[,] gameTiles;
     private GameTile spawnTile;
@@ -143,10 +143,30 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 yield return new WaitForSeconds(0.6f);
-                var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
+                var enemy = Instantiate(enemyPrefab[RNGRobot()], spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
             yield return new WaitForSeconds(2f);
         }
+    }
+
+    private int RNGRobot()
+    {
+        int i = UnityEngine.Random.Range(0, 11);
+
+        if(i <= 7)  //light Camarade Robot
+        {
+            return 0;
+        }
+        else if(i > 7) // heavy Camarade Robot
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+
+
     }
 }
