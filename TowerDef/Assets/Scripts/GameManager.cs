@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameTilePrefab;
     [SerializeField] List<GameObject> enemyPrefab = new List<GameObject>();
     [SerializeField] Player player;
+    [SerializeField] GameObject kamikaze;
     GameTile[,] gameTiles;
     private GameTile spawnTile;
+    private GameTile endTile;
     const int ColCount = 20;
     const int RowCount = 10;
 
@@ -63,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
         {
+            endTile = TargetTile;
             foreach (var t in gameTiles)
             {
                 t.SetPath(false);
@@ -81,17 +84,23 @@ public class GameManager : MonoBehaviour
         }
 
         //pause the game
-        if (Input.GetKeyDown(KeyCode.P))
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    OnPauseMenu();
+        //}
+        //if (SceneManager.GetActiveScene().buildIndex == 0)
+        //{
+        //    pauseMenu.SetActive(false);
+        //}
+        //if (SceneManager.GetActiveScene().buildIndex != 0)
+        //{
+        //    UI.SetActive(true);
+        //}
+
+        if(Input.GetKeyDown(KeyCode.K)) 
         {
-            OnPauseMenu();
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            pauseMenu.SetActive(false);
-        }
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            UI.SetActive(true);
+            var kamikazeObject = Instantiate(kamikaze, endTile.transform.position, Quaternion.identity);
+            kamikazeObject.GetComponent<Kamikaze>().SetPath(pathToGoal);
         }
     }
 

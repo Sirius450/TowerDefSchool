@@ -113,7 +113,6 @@ public class Enemy : MonoBehaviour
     {
         shoot = true;
         target.OntakeHeal(healAmount);
-        Debug.Log(target.ToString());
         yield return new WaitForSeconds(0.5f);
         shoot = false;
     }
