@@ -49,10 +49,7 @@ public class Kamikaze : MonoBehaviour
             {
                 isExplode = true;
                 Explose();
-                
-                
             }
-
         }
 
         if(isExplode)
