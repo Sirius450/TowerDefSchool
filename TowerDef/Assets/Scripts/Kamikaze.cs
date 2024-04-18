@@ -12,8 +12,6 @@ public class Kamikaze : MonoBehaviour
     [SerializeField] internal float range;
     [SerializeField] GameObject explosion;
     private bool isExplode = false;
-    public List<Enemy> enemyList = new List<Enemy>();
-
     private Stack<GameTile> path = new Stack<GameTile>();
 
     internal void SetPath(List<GameTile> pathToGoal)
@@ -45,21 +43,7 @@ public class Kamikaze : MonoBehaviour
             Destroy(gameObject);
         }
 
-
         foreach (Enemy enemy in Enemy.allEnemies)
-        {
-            if (Vector3.Distance(transform.position, enemy.transform.position) < range)
-            {
-                enemyList.Add(enemy);
-            }
-            else
-            {
-                enemyList.Remove(enemy);
-            }    
-
-        }
-
-        foreach (Enemy enemy in enemyList)
         {
             if(Vector3.Distance(transform.position, enemy.transform.position) < 0.1)
             {
@@ -80,9 +64,12 @@ public class Kamikaze : MonoBehaviour
 
     private void Explose()
     {
-        foreach (Enemy enemy in enemyList)
+        foreach (Enemy enemy in Enemy.allEnemies)
         {
-            enemy.OnTakeDamage(damage);
+            if (Vector3.Distance(transform.position, enemy.transform.position) < range)
+            {
+                enemy.OnTakeDamage(damage);
+            }
         }
     }
 }
