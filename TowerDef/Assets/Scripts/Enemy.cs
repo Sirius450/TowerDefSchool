@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     public static HashSet<Enemy> allEnemies = new HashSet<Enemy>();
 
     private Stack<GameTile> path = new Stack<GameTile>();
+    [SerializeField] List<GameTile> pathList = new List<GameTile>();
 
     internal void SetPath(List<GameTile> pathToGoal)
     {
@@ -73,10 +74,26 @@ public class Enemy : MonoBehaviour
 
             // Mettre à jour le chemin avec les nouvelles tuiles depuis la tuile la plus proche.
             path.Clear();
-            for (int i = indexNearestTile; i < tempPathToGoal.Count; i++)
+            for (int i = indexNearestTile; i /*< tempPathToGoal.Count*/ !=-1; i--)
             {
-                path.Push(tempPathToGoal[i]);
+                pathList.Add(tempPathToGoal[i]);
+                //path.Push(tempPathToGoal[i]);
             }
+            pathList.Reverse();
+
+            foreach (GameTile tile in pathList)
+            {
+                path.Push(tile);
+            }
+
+
+            //for (int i = pathList.Count - 1; i !=0; i--)
+            //{
+
+            //    path.Push(pathList[i]);
+            //}
+            
+
         }
         else
         { Debug.Log("meme chemin"); }
