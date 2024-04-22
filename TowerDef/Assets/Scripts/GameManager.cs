@@ -10,23 +10,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject UI;
 
-    [SerializeField] GameObject gameTilePrefab;
+    [SerializeField] internal GameObject gameTilePrefab;
     [SerializeField] List<GameObject> enemyPrefab = new List<GameObject>();
     [SerializeField] Player player;
     [SerializeField] GameObject kamikaze;
     GameTile[,] gameTiles;
-    private GameTile spawnTile;
-    private GameTile endTile;
-    const int ColCount = 20;
+    internal GameTile spawnTile;
+    internal GameTile endTile;
+    const int ColCount = 16;
     const int RowCount = 10;
+    [SerializeField] private string mapName = "Test";
 
     public GameTile TargetTile { get; internal set; }
     List<GameTile> pathToGoal = new List<GameTile>();
 
     public static GameManager Singleton;
+    LevelLayout layout;
 
     private void Awake()
     {
+        layout = GetComponent<LevelLayout>();
+
         //Creation of singleton
         if (Singleton == null)
         {
@@ -40,6 +44,12 @@ public class GameManager : MonoBehaviour
 
 
         gameTiles = new GameTile[ColCount, RowCount];
+
+
+      
+        //layout.ChargerCarte(mapName);
+
+
 
         for (int x = 0; x < ColCount; x++)
         {
