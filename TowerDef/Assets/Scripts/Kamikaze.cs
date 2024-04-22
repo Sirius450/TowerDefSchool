@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -13,7 +15,13 @@ public class Kamikaze : MonoBehaviour
     [SerializeField] GameObject explosion;
     private bool isExplode = false;
     private Stack<GameTile> path = new Stack<GameTile>();
+    public static HashSet<Kamikaze> allKamikaze = new HashSet<Kamikaze>();
+    List<GameTile> pathList = new List<GameTile>();
 
+    private void Awake()
+    {
+        allKamikaze.Add(this);
+    }
     internal void SetPath(List<GameTile> pathToGoal)
     {
         path.Clear();
@@ -55,6 +63,7 @@ public class Kamikaze : MonoBehaviour
         if(isExplode)
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
+            allKamikaze.Remove(this);
             Destroy(gameObject);
         }
     }
@@ -68,5 +77,48 @@ public class Kamikaze : MonoBehaviour
                 enemy.OnTakeDamage(damage);
             }
         }
+    }
+
+    internal void NewPath(List<GameTile> tempPathToGoal, List<GameTile> pathToGoal)
+    {
+        //si la liste n'est pas pareil
+        if (!tempPathToGoal.SequenceEqual(pathToGoal))
+        {
+            //pathList.Clear();
+            Vector3 currentPosition = transform.position;
+
+            // Trouver l'indice de la tuile la plus proche.
+            int indexNearestTile = FindIndexOfNearestTile(tempPathToGoal, currentPosition);
+
+            // Mettre à jour le chemin avec les nouvelles tuiles depuis la tuile la plus proche.
+            path.Clear();
+            for (int i = pathToGoal.Count - 1; i != indexNearestTile; i--)
+            {
+                pathList.Add(tempPathToGoal[i]);
+            }
+
+            foreach (GameTile tile in pathList)
+            {
+                path.Push(tile);
+            }
+        }
+    }
+
+    private int FindIndexOfNearestTile(List<GameTile> tiles, Vector3 position)
+    {
+        float minDistance = float.MaxValue;
+        int indexNearest = 0;
+
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            float distance = Vector3.Distance(position, tiles[i].transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                indexNearest = i;
+            }
+        }
+
+        return indexNearest;
     }
 }

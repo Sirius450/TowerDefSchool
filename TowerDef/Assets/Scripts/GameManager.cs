@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         //    UI.SetActive(true);
         //}
 
-        if(Input.GetKeyDown(KeyCode.K)) 
+        if (Input.GetKeyDown(KeyCode.K))
         {
             var kamikazeObject = Instantiate(kamikaze, endTile.transform.position, Quaternion.identity);
             kamikazeObject.GetComponent<Kamikaze>().SetPath(pathToGoal);
@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
         {
             return 2;
         }
-        else if(i > 16 )    //heal camarade robot
+        else if (i > 16)    //heal camarade robot
         {
             return 3;
         }
@@ -255,12 +255,16 @@ public class GameManager : MonoBehaviour
             tile = path[tile];
         }
 
-        foreach(Enemy enemy in Enemy.allEnemies)
+        foreach (Enemy enemy in Enemy.allEnemies)
         {
             enemy.NewPath(tempPathToGoal, pathToGoal);
         }
+        foreach (Kamikaze kamikaze in Kamikaze.allKamikaze)
+        {
+            kamikaze.NewPath(tempPathToGoal, pathToGoal);
+        }
 
-        pathToGoal = tempPathToGoal; 
+        pathToGoal = tempPathToGoal;
 
     }
 }
