@@ -39,34 +39,10 @@ public class Enemy : MonoBehaviour
 
     internal void NewPath(List<GameTile> tempPathToGoal, List<GameTile> pathToGoal)
     {
-
         //si la liste n'est pas pareil
         if (!tempPathToGoal.SequenceEqual(pathToGoal))
         {
-            //GameTile currentTile = path.Peek();
-
-            //float dist = float.MaxValue; 
-            //int indexTile = 0;
-
-            //for (int i = 0; i < tempPathToGoal.Count; i++)
-            //{
-            //    float currentDist = Vector3.Distance(transform.position, tempPathToGoal[i].transform.position);
-            //    if (currentDist <= dist)
-            //    {
-            //        dist = currentDist;
-            //        indexTile = i;
-            //        //Debug.Log($"index de la tuile a plus ptoche = {indexTile}");
-            //    }
-            //}
-
-            //path.Clear();
-            //foreach (GameTile tile in tempPathToGoal.Skip(indexTile))
-            //{
-            //    path.Push(tile);
-            //}
-
-
-
+            pathList.Clear(); 
             Vector3 currentPosition = transform.position;
 
             // Trouver l'indice de la tuile la plus proche.
@@ -74,10 +50,9 @@ public class Enemy : MonoBehaviour
 
             // Mettre à jour le chemin avec les nouvelles tuiles depuis la tuile la plus proche.
             path.Clear();
-            for (int i = indexNearestTile; i /*< tempPathToGoal.Count*/ !=-1; i--)
+            for (int i = indexNearestTile; i !=-1; i--)
             {
                 pathList.Add(tempPathToGoal[i]);
-                //path.Push(tempPathToGoal[i]);
             }
             pathList.Reverse();
 
@@ -85,20 +60,9 @@ public class Enemy : MonoBehaviour
             {
                 path.Push(tile);
             }
-
-
-            //for (int i = pathList.Count - 1; i !=0; i--)
-            //{
-
-            //    path.Push(pathList[i]);
-            //}
-            
-
         }
         else
         { Debug.Log("meme chemin"); }
-
-
     }
 
     private int FindIndexOfNearestTile(List<GameTile> tiles, Vector3 position)
