@@ -736,6 +736,7 @@ MonoBehaviour:
   UI: {fileID: 0}
   gameTilePrefab: {fileID: 6064064788169888742, guid: 464ed7ed4121f074cab5705a2cbd4c61, type: 3}
   enemyPrefab:
+  - {fileID: 1812623713565188647, guid: 09ae9857e1e4faf4cabb9e86b7b6e12b, type: 3}
   - {fileID: 1812623713565188647, guid: 0abe296bf59726b449e3f2109d65f4d7, type: 3}
   - {fileID: 1812623713565188647, guid: c002af514a705544ab89ac5d4b7fb8ae, type: 3}
   - {fileID: 1812623713565188647, guid: 61971e3f25b2b30478d1eeacdeecc71a, type: 3}

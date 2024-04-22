@@ -61,6 +61,8 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     {
         turretRenderer.enabled = !turretRenderer.enabled;
         IsBloced = turretRenderer.enabled;
+
+        GM.GamePath();
     }
 
     internal void SetEnemySpawn()

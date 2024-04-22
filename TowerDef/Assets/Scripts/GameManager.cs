@@ -211,23 +211,55 @@ public class GameManager : MonoBehaviour
 
     private int RNGRobot()
     {
-        int i = UnityEngine.Random.Range(0, 15);
+        int i = UnityEngine.Random.Range(0, 21);
 
-        if (i <= 7)  //light Camarade Robot
+        if (i <= 6)  //hover Camarade Robot
         {
             return 0;
         }
-        else if (i > 7 && i <= 11) // heavy Camarade Robot
+        else if (i > 6 && i <= 12) // light Camarade Robot
         {
             return 1;
         }
-        else if (i > 11)
+        else if (i > 12 && i <= 16)  // heavy camarade robot
         {
             return 2;
+        }
+        else if(i > 16 )    //heal camarade robot
+        {
+            return 3;
         }
         else
         {
             return 0;
         }
+    }
+
+    internal void GamePath()
+    {
+        List<GameTile> tempPathToGoal = new List<GameTile>();
+
+        foreach (var t in gameTiles)
+        {
+            t.SetPath(false);
+        }
+
+        var path = PathFinfing(spawnTile, TargetTile);
+        var tile = TargetTile;
+
+        while (tile != null)
+        {
+            tempPathToGoal.Add(tile);
+            tile.SetPath(true);
+            tile = path[tile];
+        }
+
+        foreach(Enemy enemy in Enemy.allEnemies)
+        {
+            enemy.NewPath(tempPathToGoal, pathToGoal);
+        }
+
+        pathToGoal = tempPathToGoal; 
+
     }
 }

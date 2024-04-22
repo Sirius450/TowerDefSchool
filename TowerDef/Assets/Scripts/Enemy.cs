@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -30,6 +31,58 @@ public class Enemy : MonoBehaviour
         foreach (GameTile tile in pathToGoal)
         {
             path.Push(tile);
+        }
+    }
+
+    internal void NewPath(List<GameTile> tempPathToGoal, List<GameTile> pathToGoal)
+    {
+        bool findTile = false;
+
+        //check pour voir si le path a changer
+        if (!tempPathToGoal.SequenceEqual(pathToGoal))
+        {
+            //check pour voir si dans le nouveau path il y a la tuile de destination
+            for (int i = 0; i < tempPathToGoal.Count - 1; i++)
+            {
+                if (tempPathToGoal[i].gameObject == path.Peek())
+                {
+                    findTile = true;
+                    path.Clear();
+
+                    for (int j = i; j < tempPathToGoal.Count - 1; j++)
+                    {
+                        path.Push(tempPathToGoal[j]);
+                    }
+                    break;
+                }
+                else
+                { findTile = false; }
+
+            }
+            //si pas sa tuille trouver la plus proche
+            if (!findTile)
+            {
+                float dist = 999;
+                int indexTile = 0;
+
+                //find la tille la plus proche
+                for (int i = 0; i < tempPathToGoal.Count - 1; i++)
+                {
+                    if (Vector3.Distance(path.Peek().transform.position, tempPathToGoal[i].transform.position) < dist)
+                    {
+                        dist = Vector3.Distance(path.Peek().transform.position, tempPathToGoal[i].transform.position);
+                        indexTile = i;
+                    }
+                }
+
+                //clear la liste et met le nouveau chemin
+                path.Clear();
+                for (int j = indexTile; j < tempPathToGoal.Count - 1; j++)
+                {
+                    path.Push(tempPathToGoal[j]);
+                }
+            }
+
         }
     }
 
@@ -80,7 +133,7 @@ public class Enemy : MonoBehaviour
     private void Heal()
     {
         Enemy target = null;
-        float prevPv =999;
+        float prevPv = 999;
         foreach (var enemy in allEnemies)
         {
             if (Vector3.Distance(transform.position, enemy.transform.position) < range && enemy.gameObject != this.gameObject)
@@ -89,7 +142,7 @@ public class Enemy : MonoBehaviour
                 {
                     target = enemy;
                     prevPv = target.currentPV;
-                }            
+                }
             }
         }
 
