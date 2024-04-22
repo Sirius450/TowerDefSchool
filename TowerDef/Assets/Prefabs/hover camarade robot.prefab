@@ -51,6 +51,7 @@ MonoBehaviour:
   PV: 3
   currentPV: 0
   HpBar: {fileID: 2679940899045069508}
+  showDirection: 1
   heal: 0
   range: 0
   healAmount: 0

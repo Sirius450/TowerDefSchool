@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float PV = 3;
     [SerializeField] internal float currentPV;
     [SerializeField] private GameObject HpBar;
+    [SerializeField] private bool showDirection = false;
 
     [SerializeField] private bool heal;
     [SerializeField] private int range;
@@ -36,54 +38,68 @@ public class Enemy : MonoBehaviour
 
     internal void NewPath(List<GameTile> tempPathToGoal, List<GameTile> pathToGoal)
     {
-        bool findTile = false;
 
-        //check pour voir si le path a changer
+        //si la liste n'est pas pareil
         if (!tempPathToGoal.SequenceEqual(pathToGoal))
         {
-            //check pour voir si dans le nouveau path il y a la tuile de destination
-            for (int i = 0; i < tempPathToGoal.Count - 1; i++)
+            //GameTile currentTile = path.Peek();
+
+            //float dist = float.MaxValue; 
+            //int indexTile = 0;
+
+            //for (int i = 0; i < tempPathToGoal.Count; i++)
+            //{
+            //    float currentDist = Vector3.Distance(transform.position, tempPathToGoal[i].transform.position);
+            //    if (currentDist <= dist)
+            //    {
+            //        dist = currentDist;
+            //        indexTile = i;
+            //        //Debug.Log($"index de la tuile a plus ptoche = {indexTile}");
+            //    }
+            //}
+
+            //path.Clear();
+            //foreach (GameTile tile in tempPathToGoal.Skip(indexTile))
+            //{
+            //    path.Push(tile);
+            //}
+
+
+
+            Vector3 currentPosition = transform.position;
+
+            // Trouver l'indice de la tuile la plus proche.
+            int indexNearestTile = FindIndexOfNearestTile(tempPathToGoal, currentPosition);
+
+            // Mettre à jour le chemin avec les nouvelles tuiles depuis la tuile la plus proche.
+            path.Clear();
+            for (int i = indexNearestTile; i < tempPathToGoal.Count; i++)
             {
-                if (tempPathToGoal[i].gameObject == path.Peek())
-                {
-                    findTile = true;
-                    path.Clear();
-
-                    for (int j = i; j < tempPathToGoal.Count - 1; j++)
-                    {
-                        path.Push(tempPathToGoal[j]);
-                    }
-                    break;
-                }
-                else
-                { findTile = false; }
-
+                path.Push(tempPathToGoal[i]);
             }
-            //si pas sa tuille trouver la plus proche
-            if (!findTile)
-            {
-                float dist = 999;
-                int indexTile = 0;
-
-                //find la tille la plus proche
-                for (int i = 0; i < tempPathToGoal.Count - 1; i++)
-                {
-                    if (Vector3.Distance(path.Peek().transform.position, tempPathToGoal[i].transform.position) < dist)
-                    {
-                        dist = Vector3.Distance(path.Peek().transform.position, tempPathToGoal[i].transform.position);
-                        indexTile = i;
-                    }
-                }
-
-                //clear la liste et met le nouveau chemin
-                path.Clear();
-                for (int j = indexTile; j < tempPathToGoal.Count - 1; j++)
-                {
-                    path.Push(tempPathToGoal[j]);
-                }
-            }
-
         }
+        else
+        { Debug.Log("meme chemin"); }
+
+
+    }
+
+    private int FindIndexOfNearestTile(List<GameTile> tiles, Vector3 position)
+    {
+        float minDistance = float.MaxValue;
+        int indexNearest = 0;
+
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            float distance = Vector3.Distance(position, tiles[i].transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                indexNearest = i;
+            }
+        }
+
+        return indexNearest;
     }
 
     private void Awake()
@@ -103,8 +119,14 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+
         if (path.Count > 0)
         {
+            if (showDirection)
+            {
+                Debug.DrawLine(transform.position, path.Peek().transform.position, Color.blue);
+            }
+
             Vector3 desPos = path.Peek().transform.position;
 
             transform.position = Vector3.MoveTowards(transform.position, desPos, speed * Time.deltaTime);
@@ -128,6 +150,7 @@ public class Enemy : MonoBehaviour
         {
             Heal();
         }
+
     }
 
     private void Heal()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -71,8 +72,8 @@ public class GameManager : MonoBehaviour
                 t.SetPath(false);
             }
 
-            var path = PathFinfing(spawnTile, TargetTile);
-            var tile = TargetTile;
+            var path = PathFinfing(spawnTile, endTile);
+            var tile = endTile;
 
             while (tile != null)
             {
@@ -244,8 +245,8 @@ public class GameManager : MonoBehaviour
             t.SetPath(false);
         }
 
-        var path = PathFinfing(spawnTile, TargetTile);
-        var tile = TargetTile;
+        var path = PathFinfing(spawnTile, endTile);
+        var tile = endTile;
 
         while (tile != null)
         {

@@ -273,7 +273,7 @@ MonoBehaviour:
   hoverRenderer: {fileID: 372676319427712833}
   turretRenderer: {fileID: 6214056220337868082}
   spawnRenderer: {fileID: 8952388216030689613}
-  damage: 1
+  damage: 0
   range: 2
 --- !u!61 &3468509688461316725
 BoxCollider2D:
