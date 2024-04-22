@@ -61,8 +61,6 @@ public class Enemy : MonoBehaviour
                 path.Push(tile);
             }
         }
-        else
-        { Debug.Log("meme chemin"); }
     }
 
     private int FindIndexOfNearestTile(List<GameTile> tiles, Vector3 position)

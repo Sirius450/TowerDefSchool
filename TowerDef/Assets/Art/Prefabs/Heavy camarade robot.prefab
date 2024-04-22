@@ -51,9 +51,11 @@ MonoBehaviour:
   PV: 10
   currentPV: 0
   HpBar: {fileID: 2679940899045069508}
+  showDirection: 0
   heal: 0
   range: 0
   healAmount: 0
+  pathList: []
 --- !u!1 &2080869428150858118
 GameObject:
   m_ObjectHideFlags: 0
