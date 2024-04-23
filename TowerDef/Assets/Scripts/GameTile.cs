@@ -9,6 +9,7 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     [SerializeField] SpriteRenderer hoverRenderer;
     [SerializeField] SpriteRenderer turretRenderer;
     [SerializeField] SpriteRenderer spawnRenderer;
+    [SerializeField] SpriteRenderer createRenderer;
     private LineRenderer lineRenderer;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
