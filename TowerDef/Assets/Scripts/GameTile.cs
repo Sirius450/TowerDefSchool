@@ -71,6 +71,12 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
         spawnRenderer.enabled = true;
     }
 
+    internal void SetWall()
+    {
+        createRenderer.enabled = true;
+        IsBloced = createRenderer.enabled;
+    }
+
     internal void SetPath(bool isPath)
     {
         spriteRenderer.color = isPath ? Color.yellow : originalColor;

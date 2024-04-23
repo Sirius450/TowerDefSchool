@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     const int ColCount = 16;
     const int RowCount = 10;
     [SerializeField] private string mapName = "Test";
+    [SerializeField] private int mapIndex = 0;
 
     public GameTile TargetTile { get; internal set; }
     List<GameTile> pathToGoal = new List<GameTile>();
@@ -41,59 +42,33 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
 
+    private void Start()
+    {
+        layout.ChargerCarte(mapIndex, gameTilePrefab, this, ref spawnTile, ref endTile);
 
-        gameTiles = new GameTile[ColCount, RowCount];
-
-
-
-        layout.ChargerCarte(mapName);
-
-        //do this pussy
-        //for pour tout les tuille et check le caracthere pour le remplcer avec le bon
-        //faire une fonction
-
-
-        for (int x = 0; x < ColCount; x++)
-        {
-            for (int y = 0; y < RowCount; y++)
-            {
-                var spawnPosition = new Vector3(x, y, 0);
-                var tile = Instantiate(gameTilePrefab, spawnPosition, Quaternion.identity);
-                gameTiles[x, y] = tile.GetComponent<GameTile>();
-                gameTiles[x, y].GM = this;
-                gameTiles[x, y].X = x;
-                gameTiles[x, y].Y = y;
-                if ((x + y) % 2 == 0)
-                {
-                    gameTiles[x, y].TurnGrey();
-                }
-            }
-        }
-
-        //spawnTile = gameTiles[1, 7];
-        spawnTile.SetEnemySpawn();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
         {
-            endTile = TargetTile;
-            foreach (var t in gameTiles)
-            {
-                t.SetPath(false);
-            }
+            //endTile = TargetTile;
+            //foreach (var t in gameTiles)
+            //{
+            //    t.SetPath(false);
+            //}
 
-            var path = PathFinfing(spawnTile, endTile);
-            var tile = endTile;
+            //var path = PathFinfing(spawnTile, endTile);
+            //var tile = endTile;
 
-            while (tile != null)
-            {
-                pathToGoal.Add(tile);
-                tile.SetPath(true);
-                tile = path[tile];
-            }
+            //while (tile != null)
+            //{
+            //    pathToGoal.Add(tile);
+            //    tile.SetPath(true);
+            //    tile = path[tile];
+            //}
             StartCoroutine(SpawnEnemyCoroutine());
         }
 

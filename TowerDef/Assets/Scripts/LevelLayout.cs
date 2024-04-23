@@ -6,202 +6,65 @@ using System.IO;
 
 public class LevelLayout : MonoBehaviour
 {
-    GameManager GM;
     GameTile[,] gameTiles;
+    GameTile wallTile;
 
+    [SerializeField] List<char[,]> Maplist = new List<char[,]>();
 
-    // const pour la taille de la map
-    const int Min = 0;
-    const int MaxHauteur = 10;
-    const int MaxLargeur = 16;
-
-    //variable
-    private int Hauteur;
-    private int Largeur;
-    private string[] FichierMap;
-
-    int ligne = 0;
-    public char[][] tableauCarte;
-    bool mapValide = false;
-
-    //Spwaner info
-    private char spwan = 'S';
-    private int spwanX = 0;
-    private int spwanY = 0;
-
-    //Fin info
-    private char fin = 'F';
-    private int finX = 0;
-    private int finY = 0;
-
-
-
-    #region Gettter\Setter
-    //getter et setter pour Hauteur
-    public int hauteur
-    {
-        get { return hauteur; }
-        set
-        {
-            if (value < Min)   // si la valeur est negatif
-            { Console.WriteLine("la hauter de la carte ne peut pas etre negatif"); }
-            else
-            {
-                if (value > MaxHauteur) //si la valeur est superieur au max de la hauteur
-                {
-                    Console.WriteLine($"la hauter de la carte ne peut pas etre superieur a {MaxHauteur}");
-                }
-                else
-                { Hauteur = value; }
-            }
-        }
-    }
-
-    //getter et setter pour Largeur
-    public int largeur
-    {
-        get { return largeur; }
-        set
-        {
-            if (value < Min)   // si la valeur est negatif
-            { Console.WriteLine("la largeur de la carte ne peut pas etre negatif"); }
-            else
-            {
-                if (value > MaxLargeur) //si la valeur est superieur au max de la hauteur
-                {
-                    Console.WriteLine($"la largeur de la carte ne peut pas etre superieur a {MaxLargeur}");
-                }
-                else
-                { Largeur = value; }
-            }
-        }
-    }
-
-    //getter et setter pour les nom des map
-    public string[] fichierMap
-    {
-        get
-        { return FichierMap; }
-        private set
-        { FichierMap = value; }
-    }
-    #endregion
+    const int ColCount = 16;
+    const int RowCount = 10;
 
     private void Awake()
     {
-        GM = GetComponent<GameManager>();
-        gameTiles = new GameTile[MaxLargeur, MaxHauteur];
-    }
+        Maplist.Add(GreatWamSect79);
+        Maplist.Add(NuclearWinter);
+        Maplist.Add(HepburnMineField);
+        Maplist.Add(heatedSkirmish);
+        Maplist.Add(NoMansLand);
 
-    //constructeur
-    public LevelLayout()
-    {
-        //si la tableau n'a pas ete creer, le faire
-        if (FichierMap == null)
-        {
-            //obtenir le chemin du dossier
-            string dossier = Directory.GetCurrentDirectory();
-
-            // cherche les map dans le dossier 
-            FichierMap = Directory.GetFiles(dossier, "*.map");
-
-            //boucle pour garder juste le nom des map
-            for (int i = 0; i < FichierMap.Length; i++)
-            {
-                //varible pour garder unique le nom des map
-                string map = "\\";
-
-                //obtenir lindex du dernier '\'
-                int index = FichierMap[i].LastIndexOf(map);
-
-                //soustrait tout les reste sauf le nom de la map
-                string NewNomMap = FichierMap[i].Substring(index + 1);
-
-                //ajuste de nouveau nom
-                FichierMap[i] = NewNomMap;
-            }
-        }
+        gameTiles = new GameTile[RowCount, ColCount];
     }
 
     //methode pour charger les cartes
-    public void ChargerCarte(string mapName)
+    public void ChargerCarte(int indexMap, GameObject gameTilePrefab, GameManager gm, ref GameTile spawnTile, ref GameTile endTile)
     {
-        //reset les valeur
-        ligne = 0;
-        mapValide = false;
-        if (tableauCarte == null)
-        { }
-        else
-        { tableauCarte = null; }
-
-        //permet de lire un fichier et le mettre dans un array
-        tableauCarte = new char[][] { };
-
-        //obtenir le chemin du dossier
-        string dossier = Directory.GetCurrentDirectory();
-
-        //charger fichier
-        //lie tout le fichier ligne par ligne
-        foreach (string ligneFichier in System.IO.File.ReadAllLines(mapName))
+        for (int x = 0; x < ColCount; x++)
         {
-            //creer un tableau temp pour les lignes 
-            char[] ligneFichierTabelau = ligneFichier.ToCharArray();
-
-            //cange la taille du tableauCarte et met la premiere ligne dans la tableau
-            Array.Resize(ref tableauCarte, tableauCarte.Length + 1);
-            tableauCarte[tableauCarte.GetUpperBound(0)] = ligneFichierTabelau;
-
-
-            //boucle attraver la ligne pour voir si trouve objet important
-            for (int i = 0; i < ligneFichier.Length - 1; i++)
+            for (int y = 0; y < RowCount; y++)
             {
-                // si trouve le Spwan
-                if (tableauCarte[ligne][i] == spwan)
+                Debug.Log($"index = {indexMap} X = {x} Y = {y}");
+                var spawnPosition = new Vector3(x, y, 0);
+                var tile = Instantiate(gameTilePrefab, spawnPosition, Quaternion.identity);
+                gameTiles[y, x] = tile.GetComponent<GameTile>(); //bug here
+                gameTiles[y, x].GM = gm;
+                gameTiles[y, x].X = x;
+                gameTiles[y, x].Y = y;
+                if ((x + y) % 2 == 0)
                 {
-                    GM.spawnTile = gameTiles[i, ligne];
-                    var spawnPosition = new Vector3(i, ligne, 0);
-                    var tile = Instantiate(GM.gameTilePrefab, spawnPosition, Quaternion.identity);
-                    gameTiles[i, ligne] = tile.GetComponent<GameTile>();
+                    gameTiles[y, x].TurnGrey();
                 }
 
-                //si trouve la fin
-                if (tableauCarte[ligne][i] == fin)
+                if (Maplist[indexMap][y, x] == 'X')
                 {
-                    GM.endTile = gameTiles[i, ligne];
+                    wallTile = gameTiles[y, x];
+                    wallTile.SetWall();
                 }
-                //trouve un mur
-                if (tableauCarte[ligne][i] == 'X')
+                else if (Maplist[indexMap][y, x] == 'S')
                 {
+                    spawnTile = gameTiles[y, x];
+                    spawnTile.SetEnemySpawn();
 
+                }
+                else if (Maplist[indexMap][y, x] == 'F')
+                {
+                    endTile = gameTiles[y, x];
                 }
             }
-
-            //ajoute une ligne a la fin du loading d'une ligne
-            ligne++;
-
-            //for (int x = 0; x < ColCount; x++)
-            //{
-            //    for (int y = 0; y < RowCount; y++)
-            //    {
-            //        var spawnPosition = new Vector3(x, y, 0);
-            //        var tile = Instantiate(gameTilePrefab, spawnPosition, Quaternion.identity);
-            //        gameTiles[x, y] = tile.GetComponent<GameTile>();
-            //        gameTiles[x, y].GM = this;
-            //        gameTiles[x, y].X = x;
-            //        gameTiles[x, y].Y = y;
-            //        if ((x + y) % 2 == 0)
-            //        {
-            //            gameTiles[x, y].TurnGrey();
-            //        }
-            //    }
-            //}
-
         }
     }
-}
 
-public class Map
-{
+
+    #region Carte
     char[,] GreatWamSect79 = new char[,]
 {
     {' ', ' ', ' ', ' ', 'X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'}, //1
@@ -276,10 +139,5 @@ public class Map
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' '}  //10
   //  1    2    3    4    5    6    7   8     9    10   11  12    13   14   15   16
 };
-
-
-
-
-
-
+    #endregion
 }
