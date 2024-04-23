@@ -2,7 +2,8 @@
     <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=86be771059aefaa428b2e4d7812b5d03&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="Container" style="flex-grow: 1; background-image: none;">
         <ui:Label tabindex="-1" text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="header" />
-        <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartGameButton" class="button" />
+        <ui:Button text="Sandbox Mode" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SandboxModeButton" class="button" />
+        <ui:Button text="Story Mode" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StoryModeButton" class="button" />
         <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SettingsButton" class="button" />
     </ui:VisualElement>
 </ui:UXML>
