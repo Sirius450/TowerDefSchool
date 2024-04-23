@@ -46,9 +46,12 @@ public class GameManager : MonoBehaviour
         gameTiles = new GameTile[ColCount, RowCount];
 
 
-      
-        //layout.ChargerCarte(mapName);
 
+        layout.ChargerCarte(mapName);
+
+        //do this pussy
+        //for pour tout les tuille et check le caracthere pour le remplcer avec le bon
+        //faire une fonction
 
 
         for (int x = 0; x < ColCount; x++)
@@ -68,7 +71,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        spawnTile = gameTiles[1, 7];
+        //spawnTile = gameTiles[1, 7];
         spawnTile.SetEnemySpawn();
     }
 
