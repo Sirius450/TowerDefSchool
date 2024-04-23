@@ -1,0 +1,25 @@
+.header {
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+}
+
+.button {
+    font-size: 20px;
+    width: 220px;
+    height: 60px;
+    align-self: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-image: url('project://database/Assets/Menu/Button.png?fileID=21300000&guid=9e7cbf0603c2fb44d969e2882277c8d3&type=3#Button');
+    margin-top: 50px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0);
+    transition-duration: 0.35s;
+}
+
+.button:hover {
+    scale: 1.1 1.1;
+    -unity-background-image-tint-color: rgb(180, 21, 21);
+}
