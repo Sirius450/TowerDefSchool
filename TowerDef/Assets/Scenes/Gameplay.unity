@@ -772,6 +772,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 203475563}
+    - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: reduceTimeWave
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: timeBetweenEnemy
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: multiDificultyWave
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4311137698570576494, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: m_Name
       value: GameManager

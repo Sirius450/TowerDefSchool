@@ -70,8 +70,6 @@ public class GameManager : MonoBehaviour
                 tile.SetPath(true);
                 tile = path[tile];
             }
-            //StartCoroutine(SpawnEnemyCoroutine());
-
             spwaning.Spawning(spawnTile, pathToGoal);
         }
 
@@ -194,46 +192,6 @@ public class GameManager : MonoBehaviour
         { result.Add(gameTiles[u.Y + 1, u.X]); }
 
         return result;
-    }
-
-    IEnumerator SpawnEnemyCoroutine()
-    {
-        while (player.totalHp != 0)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                yield return new WaitForSeconds(0.6f);
-                var enemy = Instantiate(enemyPrefab[RNGRobot()], spawnTile.transform.position, Quaternion.identity);
-                enemy.GetComponent<Enemy>().SetPath(pathToGoal);
-            }
-            yield return new WaitForSeconds(2f);
-        }
-    }
-
-    private int RNGRobot()
-    {
-        int i = UnityEngine.Random.Range(0, 21);
-
-        if (i <= 6)  //hover Camarade Robot
-        {
-            return 0;
-        }
-        else if (i > 6 && i <= 12) // light Camarade Robot
-        {
-            return 1;
-        }
-        else if (i > 12 && i <= 16)  // heavy camarade robot
-        {
-            return 2;
-        }
-        else if (i > 16)    //heal camarade robot
-        {
-            return 3;
-        }
-        else
-        {
-            return 0;
-        }
     }
 
     internal void GamePath()

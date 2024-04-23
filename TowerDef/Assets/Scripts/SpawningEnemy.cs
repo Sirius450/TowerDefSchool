@@ -11,6 +11,7 @@ public class SpawningEnemy : MonoBehaviour
     [SerializeField] float multiDificultyWave = 0.3f;
     [SerializeField] float timeBetweenEnemy = 0.5f;
     [SerializeField] float timeBetweenWave = 5f;
+    [SerializeField] float reduceTimeWave = 0.02f;
 
     List<GameTile> pathToGoal = new List<GameTile>();
 
@@ -27,6 +28,9 @@ public class SpawningEnemy : MonoBehaviour
 
     private int NextWave()
     {
+        timeBetweenEnemy -= reduceTimeWave;
+        if (timeBetweenEnemy <= 0) 
+        { timeBetweenEnemy = 0.1f; }
         return Mathf.RoundToInt(enemyWave * Mathf.Pow(currentWave, multiDificultyWave));
     }
 
