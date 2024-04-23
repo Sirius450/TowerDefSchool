@@ -10,6 +10,7 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     [SerializeField] SpriteRenderer turretRenderer;
     [SerializeField] SpriteRenderer spawnRenderer;
     [SerializeField] SpriteRenderer createRenderer;
+    [SerializeField] SpriteRenderer exitRenderer;
     private LineRenderer lineRenderer;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -75,6 +76,11 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     {
         createRenderer.enabled = true;
         IsBloced = createRenderer.enabled;
+    }
+
+    internal void SetExit()
+    {
+        exitRenderer.enabled = true;
     }
 
     internal void SetPath(bool isPath)

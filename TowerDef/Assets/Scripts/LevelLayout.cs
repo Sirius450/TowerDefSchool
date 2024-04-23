@@ -6,7 +6,7 @@ using System.IO;
 
 public class LevelLayout : MonoBehaviour
 {
-    GameTile[,] gameTiles;
+    //GameTile[,] gameTiles;
     GameTile wallTile;
 
     [SerializeField] List<char[,]> Maplist = new List<char[,]>();
@@ -22,11 +22,11 @@ public class LevelLayout : MonoBehaviour
         Maplist.Add(heatedSkirmish);
         Maplist.Add(NoMansLand);
 
-        gameTiles = new GameTile[RowCount, ColCount];
+        
     }
 
     //methode pour charger les cartes
-    public void ChargerCarte(int indexMap, GameObject gameTilePrefab, GameManager gm, ref GameTile spawnTile, ref GameTile endTile)
+    public void ChargerCarte(int indexMap, GameObject gameTilePrefab, GameManager gm, ref GameTile spawnTile, ref GameTile endTile, ref GameTile[,] gameTiles)
     {
         for (int x = 0; x < ColCount; x++)
         {
@@ -35,7 +35,7 @@ public class LevelLayout : MonoBehaviour
                 Debug.Log($"index = {indexMap} X = {x} Y = {y}");
                 var spawnPosition = new Vector3(x, y, 0);
                 var tile = Instantiate(gameTilePrefab, spawnPosition, Quaternion.identity);
-                gameTiles[y, x] = tile.GetComponent<GameTile>(); //bug here
+                gameTiles[y,x] = tile.GetComponent<GameTile>(); 
                 gameTiles[y, x].GM = gm;
                 gameTiles[y, x].X = x;
                 gameTiles[y, x].Y = y;
@@ -58,6 +58,7 @@ public class LevelLayout : MonoBehaviour
                 else if (Maplist[indexMap][y, x] == 'F')
                 {
                     endTile = gameTiles[y, x];
+                    endTile.SetExit();
                 }
             }
         }

@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        layout.ChargerCarte(mapIndex, gameTilePrefab, this, ref spawnTile, ref endTile);
-
+        gameTiles = new GameTile[RowCount, ColCount];
+        layout.ChargerCarte(mapIndex, gameTilePrefab, this, ref spawnTile, ref endTile, ref gameTiles);
     }
 
     private void Update()
@@ -55,20 +55,20 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
         {
             //endTile = TargetTile;
-            //foreach (var t in gameTiles)
-            //{
-            //    t.SetPath(false);
-            //}
+            foreach (var t in gameTiles)
+            {
+                t.SetPath(false);
+            }
 
-            //var path = PathFinfing(spawnTile, endTile);
-            //var tile = endTile;
+            var path = PathFinfing(spawnTile, endTile);
+            var tile = endTile;
 
-            //while (tile != null)
-            //{
-            //    pathToGoal.Add(tile);
-            //    tile.SetPath(true);
-            //    tile = path[tile];
-            //}
+            while (tile != null)
+            {
+                pathToGoal.Add(tile);
+                tile.SetPath(true);
+                tile = path[tile];
+            }
             StartCoroutine(SpawnEnemyCoroutine());
         }
 
@@ -172,14 +172,23 @@ public class GameManager : MonoBehaviour
     {
         var result = new List<GameTile>();
 
+        //if (u.X - 1 >= 0)
+        //{ result.Add(gameTiles[u.X - 1, u.Y]); }
+        //if (u.X + 1 < ColCount)
+        //{ result.Add(gameTiles[u.X + 1, u.Y]); }
+        //if (u.Y - 1 >= 0)
+        //{ result.Add(gameTiles[u.X, u.Y - 1]); }
+        //if (u.Y + 1 < RowCount)
+        //{ result.Add(gameTiles[u.X, u.Y + 1]); }
+
         if (u.X - 1 >= 0)
-        { result.Add(gameTiles[u.X - 1, u.Y]); }
+        { result.Add(gameTiles[u.Y, u.X - 1]); }
         if (u.X + 1 < ColCount)
-        { result.Add(gameTiles[u.X + 1, u.Y]); }
+        { result.Add(gameTiles[u.Y, u.X + 1]); }
         if (u.Y - 1 >= 0)
-        { result.Add(gameTiles[u.X, u.Y - 1]); }
+        { result.Add(gameTiles[u.Y - 1, u.X]); }
         if (u.Y + 1 < RowCount)
-        { result.Add(gameTiles[u.X, u.Y + 1]); }
+        { result.Add(gameTiles[u.Y + 1, u.X]); }
 
         return result;
     }
