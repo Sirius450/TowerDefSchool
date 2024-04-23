@@ -27,10 +27,12 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Singleton;
     LevelLayout layout;
+    SpawningEnemy spwaning;
 
     private void Awake()
     {
         layout = GetComponent<LevelLayout>();
+        spwaning = GetComponent<SpawningEnemy>();
 
         //Creation of singleton
         if (Singleton == null)
@@ -54,7 +56,6 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
         {
-            //endTile = TargetTile;
             foreach (var t in gameTiles)
             {
                 t.SetPath(false);
@@ -69,7 +70,9 @@ public class GameManager : MonoBehaviour
                 tile.SetPath(true);
                 tile = path[tile];
             }
-            StartCoroutine(SpawnEnemyCoroutine());
+            //StartCoroutine(SpawnEnemyCoroutine());
+
+            spwaning.Spawning(spawnTile, pathToGoal);
         }
 
         //pause the game
@@ -262,6 +265,6 @@ public class GameManager : MonoBehaviour
         }
 
         pathToGoal = tempPathToGoal;
-
+        spwaning.NewPath(pathToGoal);
     }
 }

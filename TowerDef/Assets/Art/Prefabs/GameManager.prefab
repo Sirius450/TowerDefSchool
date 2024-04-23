@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3109732020424105375}
   - component: {fileID: 8259715445424599047}
+  - component: {fileID: 3326399960889922474}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -54,3 +55,28 @@ MonoBehaviour:
   - {fileID: 1812623713565188647, guid: 61971e3f25b2b30478d1eeacdeecc71a, type: 3}
   player: {fileID: 0}
   kamikaze: {fileID: 8245347876646742740, guid: 2f736aa38dbf26842acf6f1995ef9b79, type: 3}
+  mapName: Test
+  mapIndex: 0
+--- !u!114 &3326399960889922474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311137698570576494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb06ff9e7f9f5ae4f9b97341317283db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab:
+  - {fileID: 1812623713565188647, guid: 09ae9857e1e4faf4cabb9e86b7b6e12b, type: 3}
+  - {fileID: 1812623713565188647, guid: 0abe296bf59726b449e3f2109d65f4d7, type: 3}
+  - {fileID: 1812623713565188647, guid: c002af514a705544ab89ac5d4b7fb8ae, type: 3}
+  - {fileID: 1812623713565188647, guid: 61971e3f25b2b30478d1eeacdeecc71a, type: 3}
+  player: {fileID: 0}
+  currentWave: 1
+  enemyWave: 8
+  multiDificultyWave: 0.3
+  timeBetweenEnemy: 0.5
+  timeBetweenWave: 5
