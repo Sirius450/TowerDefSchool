@@ -780,6 +780,10 @@ PrefabInstance:
       propertyPath: mapName
       value: NoMansLand
       objectReference: {fileID: 0}
+    - target: {fileID: 8259715445424599047, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: mapIndex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

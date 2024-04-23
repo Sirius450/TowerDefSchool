@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameTiles = new GameTile[RowCount, ColCount];
-        layout.ChargerCarte(mapIndex, gameTilePrefab, this, ref spawnTile, ref endTile, ref gameTiles);
+        layout.ChargerCarte(mapIndex, gameTilePrefab, this, ref spawnTile, ref endTile, ref gameTiles, ref mapName);
     }
 
     private void Update()

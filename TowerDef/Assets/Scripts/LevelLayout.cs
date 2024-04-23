@@ -10,6 +10,7 @@ public class LevelLayout : MonoBehaviour
     GameTile wallTile;
 
     [SerializeField] List<char[,]> Maplist = new List<char[,]>();
+    List<string> nameMapList = new List<string>();
 
     const int ColCount = 16;
     const int RowCount = 10;
@@ -22,12 +23,20 @@ public class LevelLayout : MonoBehaviour
         Maplist.Add(heatedSkirmish);
         Maplist.Add(NoMansLand);
 
-        
+        nameMapList.Add(nomGreatWamSect79);
+        nameMapList.Add(nomNuclearWinter);
+        nameMapList.Add(nomHepburnMineField);
+        nameMapList.Add(nomheatedSkirmish);
+        nameMapList.Add(nomNoMansLand);
+
+
     }
 
     //methode pour charger les cartes
-    public void ChargerCarte(int indexMap, GameObject gameTilePrefab, GameManager gm, ref GameTile spawnTile, ref GameTile endTile, ref GameTile[,] gameTiles)
+    public void ChargerCarte(int indexMap, GameObject gameTilePrefab, GameManager gm, ref GameTile spawnTile, ref GameTile endTile, ref GameTile[,] gameTiles, ref string nom)
     {
+        nom = nameMapList[indexMap];
+
         for (int x = 0; x < ColCount; x++)
         {
             for (int y = 0; y < RowCount; y++)
@@ -66,6 +75,7 @@ public class LevelLayout : MonoBehaviour
 
 
     #region Carte
+    string nomGreatWamSect79 = "GreatWamSect79";
     char[,] GreatWamSect79 = new char[,]
 {
     {' ', ' ', ' ', ' ', 'X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'}, //1
@@ -80,7 +90,7 @@ public class LevelLayout : MonoBehaviour
     {' ', ' ', ' ', ' ', ' ', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'}  //10
   //  1    2    3    4    5    6    7   8     9    10   11  12    13   14   15   16
 };
-
+    string nomNuclearWinter = "NuclearWinter";
     char[,] NuclearWinter = new char[,]
 {
     {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, //1
@@ -96,6 +106,7 @@ public class LevelLayout : MonoBehaviour
   //  1    2    3    4    5    6    7   8     9    10   11  12    13   14   15   16
 };
 
+    string nomHepburnMineField = "HepburnMineField";
     char[,] HepburnMineField = new char[,]
 {
     {'X', 'X', ' ', ' ', ' ', ' ', ' ', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, //1
@@ -110,7 +121,7 @@ public class LevelLayout : MonoBehaviour
     {'X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}  //10
   //  1    2    3    4    5    6    7   8     9    10   11  12    13   14   15   16
 };
-
+    string nomheatedSkirmish = "heatedSkirmish";
     char[,] heatedSkirmish = new char[,]
 {
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' '}, //1
@@ -125,7 +136,7 @@ public class LevelLayout : MonoBehaviour
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}  //10
   //  1    2    3    4    5    6    7   8     9    10   11  12    13   14   15   16
 };
-
+    string nomNoMansLand = "NoMansLand";
     char[,] NoMansLand = new char[,]
 {
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, //1
