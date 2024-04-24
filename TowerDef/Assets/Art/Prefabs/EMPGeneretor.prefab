@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2879893887125006295}
   - component: {fileID: -6661007838302100470}
   m_Layer: 0
-  m_Name: MortarTurret
+  m_Name: EMPGeneretor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 190c43ac8c7af48e2ae7663a44f1c7ec, type: 3}
-  m_Color: {r: 0, g: 0.07514238, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.88305783, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,15 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e865723466c08d44b4acb0e3a93166d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
-  minRange: 3
-  reloadTime: 3
-  damege: 5
-  AOI: 1
-  explosionRange: 2
-  bomde: {fileID: 5463191770813641262, guid: 6ea2ffa4b8d38aa4f9a764cf8a96b52d, type: 3}
+  range: 2
+  minRange: 0.01
+  reloadTime: 0.5
+  physic: 0
+  damege: 0
+  AOI: 0
+  explosionRange: 0
+  bomde: {fileID: 0}
+  IEM: 1
   swoling: 0.5
-  swolingTime: 0.2
+  swolingTime: 0.5
 --- !u!120 &-6661007838302100470
 LineRenderer:
   serializedVersion: 2
@@ -172,7 +174,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 0.84705883}
+      key0: {r: 0, g: 1, b: 0.87781477, a: 0.84705883}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

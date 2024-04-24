@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int range;
     [SerializeField] private int healAmount;
     private bool shoot;
+    private bool slowing = false;
     private LineRenderer lineRenderer;
 
     private Vector3 maxSizeHpBar;
@@ -42,7 +43,7 @@ public class Enemy : MonoBehaviour
         //si la liste n'est pas pareil
         if (!tempPathToGoal.SequenceEqual(pathToGoal))
         {
-            pathList.Clear(); 
+            pathList.Clear();
             Vector3 currentPosition = transform.position;
 
             // Trouver l'indice de la tuile la plus proche.
@@ -50,7 +51,7 @@ public class Enemy : MonoBehaviour
 
             // Mettre à jour le chemin avec les nouvelles tuiles depuis la tuile la plus proche.
             path.Clear();
-            for (int i = indexNearestTile; i !=-1; i--)
+            for (int i = indexNearestTile; i != -1; i--)
             {
                 pathList.Add(tempPathToGoal[i]);
             }
@@ -184,6 +185,24 @@ public class Enemy : MonoBehaviour
             allEnemies.Remove(this);
         }
 
+    }
+    internal void OnSlowing(float swoling, float swolingTime)
+    {
+        if (!slowing)
+        {
+            StartCoroutine(Slowing(swoling, swolingTime));
+        }
+    }
+
+    IEnumerator Slowing(float swoling, float swolingTime)
+    {
+        slowing = true;
+        float realSpeed = speed;
+        speed -= swoling;
+        yield return new WaitForSeconds(swolingTime);
+
+        speed = realSpeed;
+        slowing = false;
     }
 
     public void OntakeHeal(int heal)

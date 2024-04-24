@@ -9,8 +9,10 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 {
     [SerializeField] GameObject machinegunTurret;
     [SerializeField] GameObject mortarTurret;
+    [SerializeField] GameObject EMPGenerator;
     public bool machinegun = false;
     public bool mortar = false;
+    public bool IEM = false;
 
 
     [SerializeField] SpriteRenderer hoverRenderer;
@@ -42,11 +44,19 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
         {
             machinegun = true;
             mortar = false;
+            IEM = false;
         }
         if(Input.GetKeyUp(KeyCode.W))
         {
             mortar = true;
             machinegun = false;
+            IEM= false;
+        }
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            IEM = true;
+            machinegun = false;
+            mortar= false;
         }
     }
 
@@ -80,6 +90,10 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
             if (mortar) //spawn mortier
             {
                 Instantiate(mortarTurret, this.transform.position, Quaternion.identity);
+            }
+            if (IEM) //spawn EMPGernerator
+            {
+                Instantiate(EMPGenerator, this.transform.position, Quaternion.identity);
             }
         }
 
