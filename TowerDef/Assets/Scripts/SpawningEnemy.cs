@@ -54,7 +54,7 @@ public class SpawningEnemy : MonoBehaviour
     }
     private int RNGRobot()
     {
-        int i = UnityEngine.Random.Range(0, 21);
+        int i = UnityEngine.Random.Range(0, 22);
 
         if (i <= 6)  //hover Camarade Robot
         {
@@ -68,9 +68,13 @@ public class SpawningEnemy : MonoBehaviour
         {
             return 2;
         }
-        else if (i > 16)    //heal camarade robot
+        else if (i > 16 && i <= 20)    //heal camarade robot
         {
             return 3;
+        }
+        else if (i > 20)    //Giant camarade robot
+        {
+            return 4;
         }
         else
         {

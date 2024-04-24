@@ -13,6 +13,7 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     public bool machinegun = false;
     public bool mortar = false;
     public bool IEM = false;
+    public bool delete = false;
 
 
     [SerializeField] SpriteRenderer hoverRenderer;
@@ -40,23 +41,33 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             machinegun = true;
             mortar = false;
             IEM = false;
+            delete = false;
         }
-        if(Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.W))
         {
             mortar = true;
             machinegun = false;
-            IEM= false;
+            IEM = false;
+            delete = false;
         }
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             IEM = true;
             machinegun = false;
-            mortar= false;
+            mortar = false;
+            delete = false;
+        }
+        if (Input.GetKeyUp(KeyCode.Delete))
+        {
+            delete = true;
+            machinegun = false;
+            mortar = false;
+            IEM = false;
         }
     }
 
@@ -80,7 +91,6 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-
         if (!IsBloced)
         {
             if (machinegun) //spawn machingun
@@ -95,9 +105,25 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
             {
                 Instantiate(EMPGenerator, this.transform.position, Quaternion.identity);
             }
+            IsBloced = true;
         }
 
-        IsBloced = true; // = !IsBloced
+
+        if (IsBloced && delete)
+        {
+            foreach (Tourel tourel in Tourel.allTourel)
+            {
+
+                if (Vector3.Distance(this.transform.position, tourel.transform.position) < 1)
+                {
+                    IsBloced = false;
+                    tourel.OnRevome();
+                    break;
+                }
+            }
+        }
+
+        Debug.Log($"IsBloced = {IsBloced}");
         GM.GamePath();
     }
 

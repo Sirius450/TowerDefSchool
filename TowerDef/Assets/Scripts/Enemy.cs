@@ -14,12 +14,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject HpBar;
     [SerializeField] private bool showDirection = false;
 
+    [SerializeField] private bool dontCare = false;
+
     [SerializeField] private bool heal;
     [SerializeField] private int range;
     [SerializeField] private int healAmount;
     private bool shoot;
     private bool slowing = false;
     private LineRenderer lineRenderer;
+    private GameObject Gm;
+    GameManager manager;
+    Transform end;
 
     private Vector3 maxSizeHpBar;
     private Vector3 curentSize;
@@ -30,6 +35,7 @@ public class Enemy : MonoBehaviour
 
     internal void SetPath(List<GameTile> pathToGoal)
     {
+
         path.Clear();
 
         foreach (GameTile tile in pathToGoal)
@@ -84,6 +90,10 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        Gm = GameObject.Find("GameManager");
+        manager = Gm.GetComponent<GameManager>();
+        end = manager.endTile.transform;
+
         allEnemies.Add(this);
         currentPV = PV;
         maxSizeHpBar = HpBar.transform.localScale;
@@ -100,31 +110,45 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
 
-        if (path.Count > 0)
+        if (dontCare)
         {
             if (showDirection)
             {
-                Debug.DrawLine(transform.position, path.Peek().transform.position, Color.blue);
+                Debug.DrawLine(transform.position, end.transform.position, Color.blue);
             }
-
-            Vector3 desPos = path.Peek().transform.position;
-
-            transform.position = Vector3.MoveTowards(transform.position, desPos, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, end.transform.position, speed * Time.deltaTime);
 
 
-            if (Vector3.Distance(transform.position, desPos) < 0.1f)
+            if (Vector3.Distance(transform.position, end.transform.position) < 0.1f)
             {
-                path.Pop();
+                OnAttak();
             }
         }
         else
         {
-            GameObject player = GameObject.Find("Player");
-            Player healt = player.GetComponent<Player>();
-            healt.OnTakeDamege(damage);
-            allEnemies.Remove(this);
-            Destroy(gameObject);
+            if (path.Count > 0)
+            {
+                if (showDirection)
+                {
+                    Debug.DrawLine(transform.position, path.Peek().transform.position, Color.blue);
+                }
+
+                Vector3 desPos = path.Peek().transform.position;
+
+                transform.position = Vector3.MoveTowards(transform.position, desPos, speed * Time.deltaTime);
+
+
+                if (Vector3.Distance(transform.position, desPos) < 0.1f)
+                {
+                    path.Pop();
+                }
+            }
+            else
+            {
+                OnAttak();
+            }
         }
+
 
         if (heal)
         {
@@ -133,6 +157,14 @@ public class Enemy : MonoBehaviour
 
     }
 
+    private void OnAttak()
+    {
+        GameObject player = GameObject.Find("Player");
+        Player healt = player.GetComponent<Player>();
+        healt.OnTakeDamege(damage);
+        allEnemies.Remove(this);
+        Destroy(gameObject);
+    }
     private void Heal()
     {
         Enemy target = null;

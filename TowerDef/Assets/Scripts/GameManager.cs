@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         //    UI.SetActive(true);
         //}
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             var kamikazeObject = Instantiate(kamikaze, endTile.transform.position, Quaternion.identity);
             kamikazeObject.GetComponent<Kamikaze>().SetPath(pathToGoal);

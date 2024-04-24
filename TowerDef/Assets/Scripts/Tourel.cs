@@ -29,10 +29,13 @@ public class Tourel : MonoBehaviour
 
     LineRenderer lineRenderer;
 
+    public static HashSet<Tourel> allTourel = new HashSet<Tourel>();
+
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        allTourel.Add(this);
     }
 
     void Update()
@@ -111,6 +114,12 @@ public class Tourel : MonoBehaviour
 
         lineRenderer.enabled=false;
         shoot = false;
+    }
+
+    internal void OnRevome()
+    {
+        allTourel.Remove(this);
+        Destroy(gameObject);
     }
 
 }

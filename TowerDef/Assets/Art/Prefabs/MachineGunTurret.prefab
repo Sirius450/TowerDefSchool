@@ -100,8 +100,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 2
   minRange: 0.01
-  damege: 2
-  reloadTime: 0.2
+  reloadTime: 0.3
+  physic: 1
+  damege: 1
+  AOI: 0
+  explosionRange: 0
+  bomde: {fileID: 0}
+  IEM: 0
+  swoling: 0.5
+  swolingTime: 0.2
 --- !u!120 &-6661007838302100470
 LineRenderer:
   serializedVersion: 2

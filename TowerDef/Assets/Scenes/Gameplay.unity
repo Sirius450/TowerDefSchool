@@ -784,6 +784,14 @@ PrefabInstance:
       propertyPath: multiDificultyWave
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: enemyPrefab.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: enemyPrefab.Array.data[4]
+      value: 
+      objectReference: {fileID: 1812623713565188647, guid: c1453a28f63c36b439cba1b59344831a, type: 3}
     - target: {fileID: 4311137698570576494, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: m_Name
       value: GameManager
