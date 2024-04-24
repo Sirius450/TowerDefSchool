@@ -41,7 +41,7 @@ public class LevelLayout : MonoBehaviour
         {
             for (int y = 0; y < RowCount; y++)
             {
-                Debug.Log($"index = {indexMap} X = {x} Y = {y}");
+                //Debug.Log($"index = {indexMap} X = {x} Y = {y}");
                 var spawnPosition = new Vector3(x, y, 0);
                 var tile = Instantiate(gameTilePrefab, spawnPosition, Quaternion.identity);
                 gameTiles[y,x] = tile.GetComponent<GameTile>(); 

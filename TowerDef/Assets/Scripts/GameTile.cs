@@ -93,19 +93,26 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     {
         if (!IsBloced)
         {
-            if (machinegun) //spawn machingun
-            {
-                Instantiate(machinegunTurret, this.transform.position, Quaternion.identity);
-            }
-            if (mortar) //spawn mortier
-            {
-                Instantiate(mortarTurret, this.transform.position, Quaternion.identity);
-            }
-            if (IEM) //spawn EMPGernerator
-            {
-                Instantiate(EMPGenerator, this.transform.position, Quaternion.identity);
-            }
             IsBloced = true;
+            GM.GamePath();
+            if (GM.GetPathLeght() > 1)
+            {
+                if (machinegun) //spawn machingun
+                {
+                    Instantiate(machinegunTurret, this.transform.position, Quaternion.identity);
+                }
+                if (mortar) //spawn mortier
+                {
+                    Instantiate(mortarTurret, this.transform.position, Quaternion.identity);
+                }
+                if (IEM) //spawn EMPGernerator
+                {
+                    Instantiate(EMPGenerator, this.transform.position, Quaternion.identity);
+                }
+                IsBloced = true;
+            }
+            else
+            { IsBloced = false; }
         }
 
 
@@ -123,7 +130,7 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
             }
         }
 
-        Debug.Log($"IsBloced = {IsBloced}");
+        //Debug.Log($"IsBloced = {IsBloced}");
         GM.GamePath();
     }
 

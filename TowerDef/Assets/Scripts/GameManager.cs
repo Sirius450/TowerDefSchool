@@ -224,4 +224,9 @@ public class GameManager : MonoBehaviour
         pathToGoal = tempPathToGoal;
         spwaning.NewPath(pathToGoal);
     }
+
+    internal int GetPathLeght()
+    {
+        return pathToGoal.Count;
+    }
 }
