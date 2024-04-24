@@ -172,7 +172,7 @@ public class Enemy : MonoBehaviour
         shoot = false;
     }
 
-    public void OnTakeDamage(int damege)
+    public void OnTakeDamage(float damege)
     {
         currentPV -= damege;
         AdjustHpBar();

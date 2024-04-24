@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject UI;
 
     [SerializeField] internal GameObject gameTilePrefab;
-    [SerializeField] List<GameObject> enemyPrefab = new List<GameObject>();
     [SerializeField] Player player;
     [SerializeField] GameObject kamikaze;
     GameTile[,] gameTiles;
