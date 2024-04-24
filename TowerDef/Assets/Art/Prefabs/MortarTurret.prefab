@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6661007838302100470}
   m_Layer: 0
   m_Name: MortarTurret
-  m_TagString: Untagged
+  m_TagString: reset
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,10 +101,12 @@ MonoBehaviour:
   range: 5
   minRange: 3
   reloadTime: 3
+  physic: 0
   damege: 5
   AOI: 1
   explosionRange: 2
   bomde: {fileID: 5463191770813641262, guid: 6ea2ffa4b8d38aa4f9a764cf8a96b52d, type: 3}
+  IEM: 0
   swoling: 0.5
   swolingTime: 0.2
 --- !u!120 &-6661007838302100470

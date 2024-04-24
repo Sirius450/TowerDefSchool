@@ -6,10 +6,8 @@ using System.IO;
 
 public class LevelLayout : MonoBehaviour
 {
-    //GameTile[,] gameTiles;
     GameTile wallTile;
-
-    [SerializeField] List<char[,]> Maplist = new List<char[,]>();
+    List<char[,]> Maplist = new List<char[,]>();
     List<string> nameMapList = new List<string>();
 
     const int ColCount = 16;
@@ -73,6 +71,16 @@ public class LevelLayout : MonoBehaviour
         }
     }
 
+    internal int NextIndexMap(int indexMap)
+    {
+        indexMap++;
+        if(indexMap > Maplist.Count-1)
+        {
+            indexMap = 0;
+        }
+
+        return indexMap;
+    }
 
     #region Carte
     string nomGreatWamSect79 = "GreatWamSect79";

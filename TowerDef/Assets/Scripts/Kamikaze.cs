@@ -121,4 +121,15 @@ public class Kamikaze : MonoBehaviour
 
         return indexNearest;
     }
+
+    internal void OnRemove()
+    {
+        allKamikaze.Remove(this);
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        allKamikaze.Remove(this );
+    }
 }

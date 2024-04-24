@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3234601856786858849}
   m_Layer: 0
   m_Name: Heavy camarade robot
-  m_TagString: Enemy
+  m_TagString: reset
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +52,7 @@ MonoBehaviour:
   currentPV: 0
   HpBar: {fileID: 2679940899045069508}
   showDirection: 0
+  dontCare: 0
   heal: 0
   range: 0
   healAmount: 0

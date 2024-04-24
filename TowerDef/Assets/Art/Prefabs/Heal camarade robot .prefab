@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1584155517250432817}
   m_Layer: 0
   m_Name: 'Heal camarade robot '
-  m_TagString: Enemy
+  m_TagString: reset
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,9 +52,12 @@ MonoBehaviour:
   PV: 7
   currentPV: 0
   HpBar: {fileID: 2679940899045069508}
+  showDirection: 0
+  dontCare: 0
   heal: 1
   range: 3
   healAmount: 1
+  pathList: []
 --- !u!120 &1584155517250432817
 LineRenderer:
   serializedVersion: 2

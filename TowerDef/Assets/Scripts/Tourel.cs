@@ -122,4 +122,9 @@ public class Tourel : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnDestroy()
+    {
+        allTourel.Remove(this);
+    }
+
 }

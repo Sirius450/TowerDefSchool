@@ -4,17 +4,42 @@ using UnityEngine;
 
 public class SpawningEnemy : MonoBehaviour
 {
+    [Header("Spawning info")]
     [SerializeField] List<GameObject> enemyPrefab = new List<GameObject>();
-    [SerializeField] Player player;
     [SerializeField] int currentWave = 1;
     [SerializeField] int enemyWave = 8;
+    [SerializeField] int maxWave = 20;
+
+    [Header("Wave seting")]
     [SerializeField] float multiDificultyWave = 0.3f;
     [SerializeField] float timeBetweenEnemy = 0.5f;
     [SerializeField] float timeBetweenWave = 5f;
     [SerializeField] float reduceTimeWave = 0.02f;
+    [SerializeField] float timeBetweenMap = 10f;
+    internal bool nextWave = true;
+    internal bool reset = false;
 
+    [Header("player")]
+    [SerializeField] Player player;
+
+    GameManager gameManager;
     List<GameTile> pathToGoal = new List<GameTile>();
 
+    private void Start()
+    {
+        
+        gameManager = GetComponent<GameManager>();
+    }
+
+    private void Update()
+    {
+        if (currentWave > maxWave && Enemy.allEnemies.Count ==0 && !reset)
+        {
+            nextWave = false;
+            reset = true;
+            StartCoroutine(Fisnish());
+        }
+    }
     internal void Spawning(GameTile spawnTile, List<GameTile> NewPathToGoal)
     {
         pathToGoal = NewPathToGoal;
@@ -28,18 +53,19 @@ public class SpawningEnemy : MonoBehaviour
 
     private int NextWave()
     {
-        timeBetweenEnemy -= reduceTimeWave;
-        if (timeBetweenEnemy <= 0) 
-        { timeBetweenEnemy = 0.1f; }
-        return Mathf.RoundToInt(enemyWave * Mathf.Pow(currentWave, multiDificultyWave));
+        if (nextWave)
+        {
+            timeBetweenEnemy -= reduceTimeWave;
+            if (timeBetweenEnemy <= 0)
+            { timeBetweenEnemy = 0.1f; }
+            return Mathf.RoundToInt(enemyWave * Mathf.Pow(currentWave, multiDificultyWave));
+        }
+        return 0;
     }
-
-
-
 
     IEnumerator SpawnEnemyCoroutine(GameTile spawnTile)
     {
-        while (player.totalHp != 0)
+        while (player.totalHp != 0 && nextWave && Enemy.allEnemies.Count == 0f)
         {
             for (int i = 0; i < enemyWave; i++)
             {
@@ -80,5 +106,12 @@ public class SpawningEnemy : MonoBehaviour
         {
             return 0;
         }
+    }
+
+    IEnumerator Fisnish()
+    {
+        yield return new WaitForSeconds(timeBetweenMap);
+        gameManager.NextMap();
+        currentWave = 1;
     }
 }

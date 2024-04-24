@@ -7,20 +7,30 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("UI")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject UI;
 
+    [Header("General")]
     [SerializeField] internal GameObject gameTilePrefab;
     [SerializeField] Player player;
+    [SerializeField] string tagIgnore;
+    bool play = false;
+
+    [Header("Spawning Player asset")]
     [SerializeField] GameObject kamikaze;
     [SerializeField] GameObject nukeBlast;
+
+    [Header("Map info")]
+    [SerializeField] private string mapName = "Test";
+    [SerializeField] private int mapIndex = 0;
+
+
     GameTile[,] gameTiles;
     internal GameTile spawnTile;
     internal GameTile endTile;
     const int ColCount = 16;
     const int RowCount = 10;
-    [SerializeField] private string mapName = "Test";
-    [SerializeField] private int mapIndex = 0;
 
     public GameTile TargetTile { get; internal set; }
     List<GameTile> pathToGoal = new List<GameTile>();
@@ -56,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
+        if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null && !play)
         {
             foreach (var t in gameTiles)
             {
@@ -72,6 +82,7 @@ public class GameManager : MonoBehaviour
                 tile.SetPath(true);
                 tile = path[tile];
             }
+            play = true;
             spwaning.Spawning(spawnTile, pathToGoal);
         }
 
@@ -94,7 +105,7 @@ public class GameManager : MonoBehaviour
             var kamikazeObject = Instantiate(kamikaze, endTile.transform.position, Quaternion.identity);
             kamikazeObject.GetComponent<Kamikaze>().SetPath(pathToGoal);
         }
-        if(Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             Instantiate(nukeBlast, Camera.main.transform.position, Quaternion.identity);
         }
@@ -235,5 +246,34 @@ public class GameManager : MonoBehaviour
     internal int GetPathLeght()
     {
         return pathToGoal.Count;
+    }
+
+    internal void NextMap()
+    {
+        StartCoroutine(waitToLoad());
+    }
+
+    IEnumerator waitToLoad()
+    {
+        mapIndex = layout.NextIndexMap(mapIndex);
+
+        foreach (GameTile tile in gameTiles)
+        {tile.Reset(); }
+        //foreach(Tourel tourel in Tourel.allTourel)
+        //{ tourel.OnRevome(); }
+        //foreach(Kamikaze kamikaze in Kamikaze.allKamikaze)
+        //{ kamikaze.OnRemove(); }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("reset reusie");
+        yield return new WaitForSeconds(2);
+
+        gameTiles = new GameTile[RowCount, ColCount];
+        layout.ChargerCarte(mapIndex, gameTilePrefab, this, ref spawnTile, ref endTile, ref gameTiles, ref mapName);
+        Debug.Log("Loading map reusie");
+        spwaning.nextWave = true;
+        spwaning.reset = false;
+        play = false;
+
     }
 }

@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 203475563}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 355653319}
   m_Layer: 0
   m_Name: EventSystem
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 393711727}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 1464921316}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -773,8 +773,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 203475563}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: maxWave
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: reduceTimeWave
       value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: timeBetweenMap
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: timeBetweenEnemy
@@ -796,6 +804,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4311137698570576494, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: m_TagString
+      value: GameController
+      objectReference: {fileID: 0}
     - target: {fileID: 8259715445424599047, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: player
       value: 
@@ -806,12 +818,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8259715445424599047, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: mapIndex
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8259715445424599047, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: nukeBlast
       value: 
       objectReference: {fileID: 6338456540327343250, guid: 690b2b25448145942a9fba4db6200b40, type: 3}
+    - target: {fileID: 8259715445424599047, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: tagIgnore
+      value: GameController
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8629751205867488921}
   m_Layer: 0
   m_Name: Kamikaze
-  m_TagString: Untagged
+  m_TagString: reset
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,9 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2ebb323ade9b94f8d871d3bfc56ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRange: {fileID: 0}
   speed: 1.7
   damage: 5
   range: 1
   explosion: {fileID: 5463191770813641262, guid: bd4a44742bb04b54b9d0b87ae7536fbf, type: 3}
-  enemyList: []

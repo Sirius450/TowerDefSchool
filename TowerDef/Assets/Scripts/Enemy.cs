@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] private float speed = 2;
     [SerializeField] private int damage = 0;
     [SerializeField] private float PV = 3;
@@ -14,22 +15,30 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject HpBar;
     [SerializeField] private bool showDirection = false;
 
+    [Header("Ignore obstacle")]
     [SerializeField] private bool dontCare = false;
 
+    [Header("Heal")]
     [SerializeField] private bool heal;
     [SerializeField] private int range;
     [SerializeField] private int healAmount;
+
+    //info state
     private bool shoot;
     private bool slowing = false;
+
+    //refferance
     private LineRenderer lineRenderer;
     private GameObject Gm;
     GameManager manager;
     Transform end;
 
+    //Enemy life
     private Vector3 maxSizeHpBar;
     private Vector3 curentSize;
     public static HashSet<Enemy> allEnemies = new HashSet<Enemy>();
 
+    //paht
     private Stack<GameTile> path = new Stack<GameTile>();
     [SerializeField] List<GameTile> pathList = new List<GameTile>();
 
@@ -230,7 +239,7 @@ public class Enemy : MonoBehaviour
     {
         slowing = true;
         float realSpeed = speed;
-        speed -= swoling;
+        speed *= swoling;
         yield return new WaitForSeconds(swolingTime);
 
         speed = realSpeed;
@@ -251,6 +260,17 @@ public class Enemy : MonoBehaviour
         curentSize.x = (currentPV / PV) * maxSizeHpBar.x;
 
         HpBar.transform.localScale = curentSize;
+    }
+
+    internal void OnRemove()
+    {
+        allEnemies.Remove(this);
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        allEnemies.Remove(this );
     }
 
 }
