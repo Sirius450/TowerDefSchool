@@ -21,6 +21,7 @@ public class Bomde : MonoBehaviour
             if (Vector3.Distance(transform.position, enemy.transform.position) < range)
             {
                 enemy.OnTakeDamage(damage);
+                Destroy(gameObject);
             }
         }
     }

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] internal GameObject gameTilePrefab;
     [SerializeField] Player player;
     [SerializeField] GameObject kamikaze;
+    [SerializeField] GameObject nukeBlast;
     GameTile[,] gameTiles;
     internal GameTile spawnTile;
     internal GameTile endTile;
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
     {
         gameTiles = new GameTile[RowCount, ColCount];
         layout.ChargerCarte(mapIndex, gameTilePrefab, this, ref spawnTile, ref endTile, ref gameTiles, ref mapName);
+
+
     }
 
     private void Update()
@@ -90,6 +93,10 @@ public class GameManager : MonoBehaviour
         {
             var kamikazeObject = Instantiate(kamikaze, endTile.transform.position, Quaternion.identity);
             kamikazeObject.GetComponent<Kamikaze>().SetPath(pathToGoal);
+        }
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            Instantiate(nukeBlast, Camera.main.transform.position, Quaternion.identity);
         }
     }
 

@@ -808,6 +808,10 @@ PrefabInstance:
       propertyPath: mapIndex
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8259715445424599047, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
+      propertyPath: nukeBlast
+      value: 
+      objectReference: {fileID: 6338456540327343250, guid: 690b2b25448145942a9fba4db6200b40, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
