@@ -272,6 +272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b2b392eb122114b9f2f23504f01865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  machinegunTurret: {fileID: 1003829487049157273, guid: 5ace7555db131f542bbb3f493a17aa6a, type: 3}
+  mortarTurret: {fileID: 1003829487049157273, guid: 3cb13771e8e155a43be804b66c73c13d, type: 3}
+  machinegun: 1
+  mortar: 0
   hoverRenderer: {fileID: 372676319427712833}
   turretRenderer: {fileID: 6214056220337868082}
   spawnRenderer: {fileID: 8952388216030689613}

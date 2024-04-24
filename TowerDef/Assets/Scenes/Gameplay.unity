@@ -302,7 +302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HP:3
+  m_text: 'HP: 3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -774,11 +774,11 @@ PrefabInstance:
       objectReference: {fileID: 203475563}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: reduceTimeWave
-      value: 0.05
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: timeBetweenEnemy
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: multiDificultyWave
@@ -798,7 +798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8259715445424599047, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: mapIndex
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

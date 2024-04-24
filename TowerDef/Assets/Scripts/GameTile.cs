@@ -2,19 +2,25 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 
 public class GameTile : MonoBehaviour, IPointerEnterHandler,
     IPointerExitHandler, IPointerDownHandler
 {
+    [SerializeField] GameObject machinegunTurret;
+    [SerializeField] GameObject mortarTurret;
+    public bool machinegun = false;
+    public bool mortar = false;
+
+
     [SerializeField] SpriteRenderer hoverRenderer;
     [SerializeField] SpriteRenderer turretRenderer;
     [SerializeField] SpriteRenderer spawnRenderer;
     [SerializeField] SpriteRenderer createRenderer;
     [SerializeField] SpriteRenderer exitRenderer;
-    private LineRenderer lineRenderer;
+
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
-    private bool shoot;
     [SerializeField] private int damage;
     [SerializeField] private int range;
 
@@ -25,10 +31,6 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
     private void Awake()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = false;
-        lineRenderer.SetPosition(0, transform.position);
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         turretRenderer.enabled = false;
         originalColor = spriteRenderer.color;
@@ -36,9 +38,15 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
     private void Update()
     {
-        if (turretRenderer.enabled)
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            OnAttack();
+            machinegun = true;
+            mortar = false;
+        }
+        if(Input.GetKeyUp(KeyCode.W))
+        {
+            mortar = true;
+            machinegun = false;
         }
     }
 
@@ -50,6 +58,7 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+
         hoverRenderer.enabled = true;
         GM.TargetTile = this;
     }
@@ -61,9 +70,20 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        turretRenderer.enabled = !turretRenderer.enabled;
-        IsBloced = turretRenderer.enabled;
 
+        if (!IsBloced)
+        {
+            if (machinegun) //spawn machingun
+            {
+                Instantiate(machinegunTurret, this.transform.position, Quaternion.identity);
+            }
+            if (mortar) //spawn mortier
+            {
+                Instantiate(mortarTurret, this.transform.position, Quaternion.identity);
+            }
+        }
+
+        IsBloced = true; // = !IsBloced
         GM.GamePath();
     }
 
@@ -86,40 +106,5 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     internal void SetPath(bool isPath)
     {
         spriteRenderer.color = isPath ? Color.yellow : originalColor;
-    }
-
-    private void OnAttack()
-    {
-        Enemy target = null;
-        foreach (var enemy in Enemy.allEnemies)
-        {
-            if (Vector3.Distance(transform.position, enemy.transform.position) < range)
-            {
-                target = enemy;
-                break;
-            }
-        }
-
-        if (target != null)
-        {
-            lineRenderer.SetPosition(1, target.transform.position);
-            lineRenderer.enabled = true;
-            if(!shoot)
-            {
-                StartCoroutine(OnShoot(target));
-            }
-        }
-        else
-        {
-            lineRenderer.enabled = false;
-        }
-    }
-
-    IEnumerator OnShoot(Enemy target)
-    {
-        shoot = true;
-        target.OnTakeDamage(damage);
-        yield return new WaitForSeconds(0.5f);
-        shoot = false;
     }
 }
