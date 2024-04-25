@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed = 2;
     [SerializeField] private int damage = 0;
     [SerializeField] private float PV = 3;
+    [SerializeField] private int giveMoney = 10;
     [SerializeField] internal float currentPV;
     [SerializeField] private GameObject HpBar;
     [SerializeField] private bool showDirection = false;
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour
     private GameObject Gm;
     GameManager manager;
     Transform end;
+    GameObject player;
 
     //Enemy life
     private Vector3 maxSizeHpBar;
@@ -114,6 +116,7 @@ public class Enemy : MonoBehaviour
             lineRenderer.enabled = false;
         }
 
+        player = GameObject.Find("Player");
     }
 
     private void Update()
@@ -168,7 +171,6 @@ public class Enemy : MonoBehaviour
 
     private void OnAttak()
     {
-        GameObject player = GameObject.Find("Player");
         Player healt = player.GetComponent<Player>();
         healt.OnTakeDamege(damage);
         allEnemies.Remove(this);
@@ -270,6 +272,8 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        Player getMoney = player.GetComponent<Player>();
+        getMoney.OnGetMoney(giveMoney);
         allEnemies.Remove(this );
     }
 

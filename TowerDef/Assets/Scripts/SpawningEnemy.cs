@@ -33,11 +33,17 @@ public class SpawningEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (currentWave > maxWave && Enemy.allEnemies.Count ==0 && !reset)
+        if (currentWave > maxWave && Enemy.allEnemies.Count ==0 && !reset && Enemy.allEnemies.Count == 0f)
         {
             nextWave = false;
             reset = true;
             StartCoroutine(Fisnish());
+        }
+
+        if(player == null)
+        {
+            var hp = GameObject.Find("Player");
+            player = hp.GetComponent<Player>();
         }
     }
     internal void Spawning(GameTile spawnTile, List<GameTile> NewPathToGoal)
@@ -65,7 +71,7 @@ public class SpawningEnemy : MonoBehaviour
 
     IEnumerator SpawnEnemyCoroutine(GameTile spawnTile)
     {
-        while (player.totalHp != 0 && nextWave && Enemy.allEnemies.Count == 0f)
+        while (player.totalHp != 0 && nextWave)
         {
             for (int i = 0; i < enemyWave; i++)
             {

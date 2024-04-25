@@ -50,12 +50,13 @@ MonoBehaviour:
   speed: 1.5
   damage: 0
   PV: 7
+  giveMoney: 30
   currentPV: 0
   HpBar: {fileID: 2679940899045069508}
   showDirection: 0
   dontCare: 0
   heal: 1
-  range: 3
+  range: 2
   healAmount: 1
   pathList: []
 --- !u!120 &1584155517250432817

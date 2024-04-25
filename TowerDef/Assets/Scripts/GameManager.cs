@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Instantiate(nukeBlast, Camera.main.transform.position, Quaternion.identity);
+            Instantiate(nukeBlast, this.transform.position, Quaternion.identity);
         }
     }
 
