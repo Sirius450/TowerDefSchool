@@ -94,19 +94,24 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
             GM.GamePath();
             if (GM.GetPathLeght() > 1)
             {
+                IsBloced = true;
                 if (machinegun) //spawn machingun
                 {
                     Instantiate(machinegunTurret, this.transform.position, Quaternion.identity);
                 }
-                if (mortar) //spawn mortier
+                else if (mortar) //spawn mortier
                 {
                     Instantiate(mortarTurret, this.transform.position, Quaternion.identity);
                 }
-                if (IEM) //spawn EMPGernerator
+                else if (IEM) //spawn EMPGernerator
                 {
                     Instantiate(EMPGenerator, this.transform.position, Quaternion.identity);
                 }
-                IsBloced = true;
+                else
+                {
+                    IsBloced=false;
+                }
+
             }
             else
             { IsBloced = false; }

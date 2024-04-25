@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     internal int totalHp; //retirer plus tard
     public static int bonusHP = 0;
 
-    int totalMoney;
+    public static int totalMoney;
     public int bonusMoney;
 
     private void Awake()
@@ -37,4 +37,18 @@ public class Player : MonoBehaviour
 
         MoneyText.text = $"Money : {totalMoney}$";
     }
+
+    public bool OnCheckMoney(int money)
+    {
+        return totalMoney - money >=0;
+    }
+
+    public void OnSpendMoney(int money)
+    {
+        totalMoney -= money;
+        totalMoney = (int)Mathf.Clamp(totalMoney, 0, 999999999);
+
+        MoneyText.text = $"Money : {totalMoney}$";
+
+    }    
 }

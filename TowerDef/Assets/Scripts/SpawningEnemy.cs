@@ -27,24 +27,25 @@ public class SpawningEnemy : MonoBehaviour
 
     private void Start()
     {
-        
+
         gameManager = GetComponent<GameManager>();
     }
 
     private void Update()
     {
-        if (currentWave > maxWave && Enemy.allEnemies.Count ==0 && !reset && Enemy.allEnemies.Count == 0f)
+        if (currentWave == maxWave && Enemy.allEnemies.Count == 0 && !reset)
         {
             nextWave = false;
             reset = true;
             StartCoroutine(Fisnish());
         }
 
-        if(player == null)
+        if (player == null)
         {
             var hp = GameObject.Find("Player");
             player = hp.GetComponent<Player>();
         }
+
     }
     internal void Spawning(GameTile spawnTile, List<GameTile> NewPathToGoal)
     {
@@ -73,12 +74,16 @@ public class SpawningEnemy : MonoBehaviour
     {
         while (player.totalHp != 0 && nextWave)
         {
+            yield return new WaitUntil(() => Enemy.allEnemies.Count == 0);
+
             for (int i = 0; i < enemyWave; i++)
             {
                 yield return new WaitForSeconds(timeBetweenEnemy);
                 var enemy = Instantiate(enemyPrefab[RNGRobot()], spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
+
+
             currentWave++;
             enemyWave = NextWave();
             yield return new WaitForSeconds(timeBetweenWave);

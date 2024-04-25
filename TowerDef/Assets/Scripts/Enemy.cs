@@ -224,8 +224,11 @@ public class Enemy : MonoBehaviour
 
         if (currentPV <= 0)
         {
+            Player getMoney = player.GetComponent<Player>();
+            getMoney.OnGetMoney(giveMoney);
+
+            //allEnemies.Remove(this);
             Destroy(gameObject);
-            allEnemies.Remove(this);
         }
 
     }
@@ -272,8 +275,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        Player getMoney = player.GetComponent<Player>();
-        getMoney.OnGetMoney(giveMoney);
         allEnemies.Remove(this );
     }
 
