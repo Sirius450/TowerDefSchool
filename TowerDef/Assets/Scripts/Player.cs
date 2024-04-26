@@ -6,49 +6,65 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text hpText;
     [SerializeField] TMP_Text MoneyText;
     [SerializeField] int BaseHp;
-    [SerializeField] int BaseMoney;
+    [SerializeField] internal int currentMoney;
+
+    public static Player Singleton;
 
     internal int totalHp; //retirer plus tard
     public static int bonusHP = 0;
 
-    public static int totalMoney;
-    public int bonusMoney;
 
     private void Awake()
     {
+        if (Singleton == null)
+        {
+            Singleton = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+        Debug.Log("resetMoney");
         totalHp = BaseHp + bonusHP;
-        totalMoney = BaseMoney + bonusMoney;
-        MoneyText.text = $"Money : {totalMoney}$";
+        MoneyText.text = $"Money : {currentMoney}$";
         hpText.text = $"HP: {totalHp}"; //retirer plus tard
+    }
+
+
+    private void Update()
+    {
+        if(hpText == null || MoneyText == null)
+        {
+            hpText = GameObject.Find("HPBar").GetComponent<TMP_Text>();
+            MoneyText = GameObject.Find("MoneyBar").GetComponent<TMP_Text>();
+        }
+
+        hpText.text = $"HP: {totalHp}";
+        MoneyText.text = $"${currentMoney}";
     }
 
     public void OnTakeDamege(int damege)
     {
         totalHp -= damege;
-        totalHp = (int)Mathf.Clamp(totalHp, 0, 999);
-
-        hpText.text = $"HP: {totalHp}";//retirer plus tard
+        totalHp = (int)Mathf.Clamp(totalHp, 0, 999);   
     }
 
     public void  OnGetMoney(int money)
     {
-        totalMoney += money;
-        totalMoney = (int)Mathf.Clamp(totalMoney, 0, 999999999);
-
-        MoneyText.text = $"Money : {totalMoney}$";
+        currentMoney += money;
+        currentMoney = (int)Mathf.Clamp(currentMoney, 0, 999999999);
     }
 
     public bool OnCheckMoney(int money)
     {
-        return totalMoney - money >=0;
+        return currentMoney - money >=0;
     }
 
     public void OnSpendMoney(int money)
     {
-        totalMoney -= money;
-        totalMoney = (int)Mathf.Clamp(totalMoney, 0, 999999999);
-
-        MoneyText.text = $"Money : {totalMoney}$";
-
+        currentMoney -= money;
+        currentMoney = (int)Mathf.Clamp(currentMoney, 0, 999999999);
     }    
 }

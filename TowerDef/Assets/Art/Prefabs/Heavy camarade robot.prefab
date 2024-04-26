@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   damage: 2
-  PV: 75
-  giveMoney: 20
+  PV: 10
+  giveMoney: 500
   currentPV: 0
   HpBar: {fileID: 2679940899045069508}
   showDirection: 0

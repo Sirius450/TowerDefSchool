@@ -23,6 +23,7 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     [SerializeField] SpriteRenderer exitRenderer;
 
     private SpriteRenderer spriteRenderer;
+    private Player player;
     private Color originalColor;
 
     public GameManager GM { get; internal set; }
@@ -34,6 +35,9 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
+
+        var temp = GameObject.Find("Player");
+        player = temp.GetComponent<Player>();
     }
 
     private void Update()
@@ -95,17 +99,20 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
             if (GM.GetPathLeght() > 1)
             {
                 IsBloced = true;
-                if (machinegun) //spawn machingun
+                if (machinegun && player.OnCheckMoney(machinegunTurret.GetComponent<Tourel>().cost)) //spawn machingun
                 {
                     Instantiate(machinegunTurret, this.transform.position, Quaternion.identity);
+                    player.OnSpendMoney(machinegunTurret.GetComponent<Tourel>().cost);
                 }
-                else if (mortar) //spawn mortier
+                else if (mortar && player.OnCheckMoney(mortarTurret.GetComponent<Tourel>().cost)) //spawn mortier
                 {
                     Instantiate(mortarTurret, this.transform.position, Quaternion.identity);
+                    player.OnSpendMoney(mortarTurret.GetComponent<Tourel>().cost);
                 }
-                else if (IEM) //spawn EMPGernerator
+                else if (IEM && player.OnCheckMoney(EMPGenerator.GetComponent<Tourel>().cost)) //spawn EMPGernerator
                 {
                     Instantiate(EMPGenerator, this.transform.position, Quaternion.identity);
+                    player.OnSpendMoney(EMPGenerator.GetComponent<Tourel>().cost);
                 }
                 else
                 {
@@ -126,6 +133,7 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
                 if (Vector3.Distance(this.transform.position, tourel.transform.position) < 1)
                 {
                     IsBloced = false;
+                    player.OnGetMoney(tourel.cost);
                     tourel.OnRevome();
                     break;
                 }

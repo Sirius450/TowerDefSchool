@@ -50,7 +50,7 @@ MonoBehaviour:
   speed: 1.5
   damage: 0
   PV: 7
-  giveMoney: 30
+  giveMoney: 250
   currentPV: 0
   HpBar: {fileID: 2679940899045069508}
   showDirection: 0

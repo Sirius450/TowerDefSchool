@@ -6,6 +6,7 @@ using UnityEngine;
 public class Tourel : MonoBehaviour
 {
     [Header("General")]
+    [SerializeField] internal int cost = 100;
     [SerializeField] float range = 2f;
     [SerializeField] float minRange = 0.01f;
     [SerializeField] float reloadTime = 0.2f;
