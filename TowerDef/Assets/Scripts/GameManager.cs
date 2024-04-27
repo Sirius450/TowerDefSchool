@@ -100,14 +100,16 @@ public class GameManager : MonoBehaviour
         //    UI.SetActive(true);
         //}
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && player.OnCheckMoney(kamikaze.GetComponent<Kamikaze>().cost))
         {
             var kamikazeObject = Instantiate(kamikaze, endTile.transform.position, Quaternion.identity);
             kamikazeObject.GetComponent<Kamikaze>().SetPath(pathToGoal);
+            player.OnSpendMoney(kamikazeObject.GetComponent<Kamikaze>().cost);
         }
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T)&& player.OnCheckMoney(nukeBlast.GetComponent<NukeBlast>().cost))
         {
             Instantiate(nukeBlast, this.transform.position, Quaternion.identity);
+            player.OnSpendMoney(nukeBlast.GetComponent<NukeBlast>().cost);
         }
     }
 

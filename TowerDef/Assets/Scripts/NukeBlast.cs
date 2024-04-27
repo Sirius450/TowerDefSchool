@@ -8,6 +8,7 @@ public class NukeBlast : MonoBehaviour
 {
     [SerializeField] float damege = 100f;
     [SerializeField] float duration = 2f;
+    [SerializeField] internal int cost = 15000;
     VisualEffect nukeBlast;
 
     private void Start()

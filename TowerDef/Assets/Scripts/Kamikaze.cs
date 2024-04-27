@@ -13,6 +13,7 @@ public class Kamikaze : MonoBehaviour
     [SerializeField] internal int damage;
     [SerializeField] internal float range;
     [SerializeField] GameObject explosion;
+    [SerializeField] internal int cost = 4500;
     private bool isExplode = false;
     private Stack<GameTile> path = new Stack<GameTile>();
     public static HashSet<Kamikaze> allKamikaze = new HashSet<Kamikaze>();
