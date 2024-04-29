@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - reset
+  - Turret
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MapImage
+    uniqueID: 497211515
+    locked: 0
+  - name: Path and tiles
+    uniqueID: 1371123209
+    locked: 0
   - name: Turret
     uniqueID: 1687505569
+    locked: 0
+  - name: Enemies
+    uniqueID: 3990103069
     locked: 0

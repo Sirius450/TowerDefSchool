@@ -7,10 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("UI")]
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject UI;
-
     [Header("General")]
     [SerializeField] internal GameObject gameTilePrefab;
     [SerializeField] Player player;
@@ -86,19 +82,6 @@ public class GameManager : MonoBehaviour
             spwaning.Spawning(spawnTile, pathToGoal);
         }
 
-        //pause the game
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    OnPauseMenu();
-        //}
-        //if (SceneManager.GetActiveScene().buildIndex == 0)
-        //{
-        //    pauseMenu.SetActive(false);
-        //}
-        //if (SceneManager.GetActiveScene().buildIndex != 0)
-        //{
-        //    UI.SetActive(true);
-        //}
 
         if (Input.GetKeyDown(KeyCode.R) && player.OnCheckMoney(kamikaze.GetComponent<Kamikaze>().cost))
         {
@@ -113,25 +96,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnPauseMenu()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            if (pauseMenu.active == false)
-            {
-                pauseMenu.SetActive(true);
-            }
-            else
-            {
-                pauseMenu.SetActive(false);
-            }
-        }
-    }
-
-    public void GoToMainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
 
     private Dictionary<GameTile, GameTile> PathFinfing(GameTile sourceTile, GameTile targetTile)
     {

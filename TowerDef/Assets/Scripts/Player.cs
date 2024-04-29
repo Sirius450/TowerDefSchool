@@ -41,14 +41,14 @@ public class Player : MonoBehaviour
     {
         if(hpText == null || MoneyText == null || ExpText == null)
         {
-            hpText = GameObject.Find("HPBar").GetComponentInChildren<TMP_Text>();
-            MoneyText = GameObject.Find("MoneyBar").GetComponentInChildren<TMP_Text>();
+            hpText = GameObject.Find("HEALTH").GetComponentInChildren<TMP_Text>();
+            MoneyText = GameObject.Find("MONEY").GetComponentInChildren<TMP_Text>();
             ExpText = GameObject.Find("Exp").GetComponentInChildren<TMP_Text>();
         }
 
-        hpText.text = $"HP: {totalHp}";
-        MoneyText.text = $"${currentMoney}";
-        ExpText.text = $"Exp {currentExp}";
+        hpText.text = $"{totalHp}";
+        MoneyText.text = $"{currentMoney}";
+        ExpText.text = $"{currentExp}";
     }
 
     public void OnTakeDamege(int damege)

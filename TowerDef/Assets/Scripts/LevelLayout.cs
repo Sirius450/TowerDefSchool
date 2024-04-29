@@ -50,7 +50,7 @@ public class LevelLayout : MonoBehaviour
                 gameTiles[y, x].Y = y;
                 if ((x + y) % 2 == 0)
                 {
-                    gameTiles[y, x].TurnGrey();
+                    gameTiles[y, x].TurnGrey(0.5f);
                 }
 
                 if (Maplist[indexMap][y, x] == 'X')

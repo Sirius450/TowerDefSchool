@@ -72,10 +72,16 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
         }
     }
 
-    internal void TurnGrey()
+
+    internal void TurnGrey(float alphaValue)
     {
-        spriteRenderer.color = Color.gray;
-        originalColor = spriteRenderer.color;
+        //spriteRenderer.color = Color.gray;
+        //originalColor = spriteRenderer.color;
+
+        Color currentColor = spriteRenderer.color;
+        Color newColor = new Color(currentColor.grayscale, currentColor.grayscale, currentColor.grayscale, 0.5f);
+        spriteRenderer.color = newColor;
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -116,7 +122,7 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
                 }
                 else
                 {
-                    IsBloced=false;
+                    IsBloced = false;
                 }
 
             }
@@ -162,14 +168,16 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
     internal void SetPath(bool isPath)
     {
-        spriteRenderer.color = isPath ? Color.yellow : originalColor;
+        Color transparentOrange = new Color(1, 0.375f, 0, 0.5f);
+
+        spriteRenderer.color = isPath ? transparentOrange : originalColor;
     }
 
     internal void Reset()
     {
         IsBloced = false;
         hoverRenderer.enabled = false;
-        spawnRenderer.enabled =false;
+        spawnRenderer.enabled = false;
         createRenderer.enabled = false;
         exitRenderer.enabled = false;
         spriteRenderer.color = originalColor;
