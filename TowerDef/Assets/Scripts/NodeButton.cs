@@ -32,7 +32,7 @@ public class NodeButton : MonoBehaviour
     Player player;
     private void Awake()
     {
-        valueText.text = $"+{bonusHP} HP";
+        //valueText.text = $"+{bonusHP} HP";
         lineRenderer = GetComponent<LineRenderer>();
 
         if (parentNode != null)

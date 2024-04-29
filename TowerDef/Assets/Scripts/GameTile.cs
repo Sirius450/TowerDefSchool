@@ -152,18 +152,20 @@ public class GameTile : MonoBehaviour, IPointerEnterHandler,
 
     internal void SetEnemySpawn()
     {
+        //IsBloced = true;
         spawnRenderer.enabled = true;
     }
 
     internal void SetWall()
     {
-        createRenderer.enabled = true;
-        IsBloced = createRenderer.enabled;
+        //createRenderer.enabled = true;
+        IsBloced = true;/*createRenderer.enabled;*/
     }
 
     internal void SetExit()
     {
         exitRenderer.enabled = true;
+        //IsBloced = true ;
     }
 
     internal void SetPath(bool isPath)

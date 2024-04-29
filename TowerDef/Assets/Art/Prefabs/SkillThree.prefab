@@ -189,6 +189,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: +0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: power
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: effect
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: expCost
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: parentNode
       value: 
@@ -201,6 +217,11 @@ PrefabInstance:
 --- !u!4 &1468274931603218421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1521991199540233002, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+  m_PrefabInstance: {fileID: 107926601044319455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4279294382364527821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4187350647985033234, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
   m_PrefabInstance: {fileID: 107926601044319455}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &786991430822422811
@@ -255,6 +276,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: +0.3s
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: range
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: expCost
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: parentNode
       value: 
@@ -267,6 +300,11 @@ PrefabInstance:
 --- !u!4 &2302683459416468017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1521991199540233002, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+  m_PrefabInstance: {fileID: 786991430822422811}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3528431442899253513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4187350647985033234, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
   m_PrefabInstance: {fileID: 786991430822422811}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1350958887821731134
@@ -320,6 +358,18 @@ PrefabInstance:
     - target: {fileID: 4187350647985033234, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: m_Name
       value: Node (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: effect
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: realod
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -394,6 +444,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: +0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: power
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: effect
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -467,6 +529,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node
       objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: +0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: range
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: effect
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -539,6 +613,22 @@ PrefabInstance:
     - target: {fileID: 4187350647985033234, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: m_Name
       value: Node (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: effect
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: realod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: expCost
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: parentNode
@@ -617,6 +707,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node
       objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: Ultimate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: expCost
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: Ultimate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: nodeLiset.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: nodeLiset.Array.data[0]
+      value: 
+      objectReference: {fileID: 3528431442899253513}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: nodeLiset.Array.data[1]
+      value: 
+      objectReference: {fileID: 4279294382364527821}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: nodeLiset.Array.data[2]
+      value: 
+      objectReference: {fileID: 5820336538711049847}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -679,6 +797,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: effect
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: realod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: expCost
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: parentNode
       value: 
@@ -688,6 +822,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+--- !u!1 &5820336538711049847 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4187350647985033234, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+  m_PrefabInstance: {fileID: 7699334588799063653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9207252005006005583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1521991199540233002, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
@@ -744,6 +883,22 @@ PrefabInstance:
     - target: {fileID: 4187350647985033234, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: m_Name
       value: Node (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: +0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: power
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: effect
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: expCost
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: parentNode
@@ -821,6 +976,22 @@ PrefabInstance:
     - target: {fileID: 4187350647985033234, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: m_Name
       value: Node (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342576709850890498, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: m_text
+      value: +0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: range
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: effect
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
+      propertyPath: expCost
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4745767679309127840, guid: 3966e813ad2c82d4c834ade84121e2c8, type: 3}
       propertyPath: parentNode
