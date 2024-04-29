@@ -18,6 +18,10 @@ public class NodeButton : MonoBehaviour
     [SerializeField] TMP_Text valueText;
     [SerializeField] int bonusHP = 1;
     [SerializeField] bool actif= false;
+    [SerializeField] float effect = 0.3f;
+    [SerializeField] bool range;
+    [SerializeField] bool power;
+    [SerializeField] bool realod;
 
     LineRenderer lineRenderer;
     NodeState currentState = NodeState.Unaccessible;
@@ -108,9 +112,14 @@ public class NodeButton : MonoBehaviour
         currentState = nodeState;
         switch (currentState)
         {
-            case NodeState.Obtained:
-                Player.bonusHP += bonusHP;
+            case NodeState.Obtained:  
                 actif = true;
+
+                foreach(Tourel tourel in Tourel.allTourel)
+                {
+    
+                }
+
                 spriteRenderer.color = Color.green;
                 foreach (var child in children)
                     child.SetState(NodeState.Accessible);
