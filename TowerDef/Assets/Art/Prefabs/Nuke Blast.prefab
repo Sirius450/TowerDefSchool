@@ -126,3 +126,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damege: 100
   duration: 2
+  cost: 15000

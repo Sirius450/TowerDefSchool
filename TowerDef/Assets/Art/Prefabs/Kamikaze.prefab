@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.7
-  damage: 5
+  damage: 10
   range: 1
   explosion: {fileID: 5463191770813641262, guid: bd4a44742bb04b54b9d0b87ae7536fbf, type: 3}
+  cost: 4500
