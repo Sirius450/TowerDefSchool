@@ -7,9 +7,11 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text hpText;
     [SerializeField] TMP_Text MoneyText;
     [SerializeField] TMP_Text ExpText;
+    [SerializeField] TMP_Text waveText;
     [SerializeField] int BaseHp;
     [SerializeField] internal int currentMoney;
     [SerializeField] internal int currentExp;
+    [SerializeField] internal int currentWave;
 
     public static Player Singleton;
 
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour
         MoneyText.text = $"Money : {currentMoney}$";
         ExpText.text = $"Exp {currentExp}";
         hpText.text = $"HP: {totalHp}"; //retirer plus tard
+        waveText.text = $"Round {currentWave}";
     }
 
 
@@ -44,11 +47,13 @@ public class Player : MonoBehaviour
             hpText = GameObject.Find("HEALTH").GetComponentInChildren<TMP_Text>();
             MoneyText = GameObject.Find("MONEY").GetComponentInChildren<TMP_Text>();
             ExpText = GameObject.Find("Exp").GetComponentInChildren<TMP_Text>();
+            waveText = GameObject.Find("RoundNumber").GetComponent<TMP_Text>();
         }
 
         hpText.text = $"{totalHp}";
         MoneyText.text = $"{currentMoney}";
         ExpText.text = $"{currentExp}";
+        waveText.text = $"Round {currentWave}";
     }
 
     public void OnTakeDamege(int damege)

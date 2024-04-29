@@ -47,6 +47,7 @@ public class SpawningEnemy : MonoBehaviour
             player = hp.GetComponent<Player>();
         }
 
+        player.currentWave = currentWave;
     }
     internal void Spawning(GameTile spawnTile, List<GameTile> NewPathToGoal)
     {

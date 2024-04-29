@@ -1503,6 +1503,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1151940559}
   m_SourcePrefab: {fileID: 100100000, guid: 2856e6664718b13478a6f7716ee8f90c, type: 3}
+--- !u!114 &712433620 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8869799207566386003, guid: 2856e6664718b13478a6f7716ee8f90c, type: 3}
+  m_PrefabInstance: {fileID: 712433619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &734429088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6284773119399173708, guid: 2856e6664718b13478a6f7716ee8f90c, type: 3}
@@ -1770,6 +1781,10 @@ PrefabInstance:
       propertyPath: ExpText
       value: 
       objectReference: {fileID: 95800080}
+    - target: {fileID: 7504964079376368598, guid: def699159f1709248a95b6edf5b33356, type: 3}
+      propertyPath: waveText
+      value: 
+      objectReference: {fileID: 712433620}
     - target: {fileID: 7504964079376368598, guid: def699159f1709248a95b6edf5b33356, type: 3}
       propertyPath: MoneyText
       value: 
