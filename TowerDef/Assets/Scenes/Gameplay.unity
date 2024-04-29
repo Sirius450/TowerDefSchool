@@ -1742,7 +1742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7504964079376368598, guid: def699159f1709248a95b6edf5b33356, type: 3}
       propertyPath: BaseHp
-      value: 20
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7504964079376368598, guid: def699159f1709248a95b6edf5b33356, type: 3}
       propertyPath: hpText
@@ -1827,7 +1827,7 @@ PrefabInstance:
       objectReference: {fileID: 203475563}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: maxWave
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: reduceTimeWave
