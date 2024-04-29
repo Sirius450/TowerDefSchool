@@ -3,13 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//on pourrait utiliser using Editor et onDrawGizmos pour avoir le range des tours
+
 public class Tourel : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Transform gatlingRotationPoint;
+
     [Header("General")]
     [SerializeField] internal int cost = 100;
     [SerializeField] float range = 2f;
     [SerializeField] float minRange = 0.01f;
     [SerializeField] float reloadTime = 0.2f;
+    [SerializeField] private float rotationspeed = 5f;
 
     [Header("Physic damege")]
     [SerializeField] bool physic = false;
@@ -32,6 +38,10 @@ public class Tourel : MonoBehaviour
 
     public static HashSet<Tourel> allTourel = new HashSet<Tourel>();
 
+    //to find targets
+    Enemy target = null;
+    float distance = 999f;
+
 
     private void Awake()
     {
@@ -41,18 +51,7 @@ public class Tourel : MonoBehaviour
 
     void Update()
     {
-        Enemy target = null;
-        float distance = 999f;
-        foreach (var enemy in Enemy.allEnemies)
-        {
-            distance = Vector3.Distance(transform.position, enemy.transform.position);
-
-            if (distance < range && distance > minRange)
-            {
-                target = enemy;
-                break;
-            }
-        }
+        FindTarget();        
 
         if (target != null)
         {
@@ -80,9 +79,34 @@ public class Tourel : MonoBehaviour
             lineRenderer.enabled = false;
         }
     }
+
+    private void FindTarget()
+    {
+        foreach (var enemy in Enemy.allEnemies)
+        {
+            distance = Vector3.Distance(transform.position, enemy.transform.position);
+
+            if (distance < range && distance > minRange)
+            {
+                target = enemy;
+                break;
+            }
+        }
+    }
+
+    private void RotateTowardsTarget()
+    {
+        float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        gatlingRotationPoint.rotation = Quaternion.Lerp(gatlingRotationPoint.rotation, targetRotation, rotationspeed * Time.deltaTime);
+    }
+
+
     IEnumerator OnShoot(Enemy target)
     {
         shoot = true;
+        RotateTowardsTarget();
         target.OnTakeDamage(damege);
         yield return new WaitForSeconds(reloadTime);
         shoot = false;
