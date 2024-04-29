@@ -9,19 +9,20 @@ public class LevelLayout : MonoBehaviour
     GameTile wallTile;
     List<char[,]> Maplist = new List<char[,]>();
     List<string> nameMapList = new List<string>();
+    [SerializeField] List<GameObject> imageMap = new List<GameObject>();
 
     const int ColCount = 16;
     const int RowCount = 10;
 
     private void Awake()
     {
-        Maplist.Add(GreatWamSect79);
+        Maplist.Add(GreatWallSect79);
         Maplist.Add(NuclearWinter);
         Maplist.Add(HepburnMineField);
         Maplist.Add(heatedSkirmish);
         Maplist.Add(NoMansLand);
 
-        nameMapList.Add(nomGreatWamSect79);
+        nameMapList.Add(nomGreatWallSect79);
         nameMapList.Add(nomNuclearWinter);
         nameMapList.Add(nomHepburnMineField);
         nameMapList.Add(nomheatedSkirmish);
@@ -34,6 +35,7 @@ public class LevelLayout : MonoBehaviour
     public void ChargerCarte(int indexMap, GameObject gameTilePrefab, GameManager gm, ref GameTile spawnTile, ref GameTile endTile, ref GameTile[,] gameTiles, ref string nom)
     {
         nom = nameMapList[indexMap];
+        Instantiate(imageMap[indexMap], this.transform.position, Quaternion.identity);
 
         for (int x = 0; x < ColCount; x++)
         {
@@ -83,8 +85,8 @@ public class LevelLayout : MonoBehaviour
     }
 
     #region Carte
-    string nomGreatWamSect79 = "GreatWamSect79";
-    char[,] GreatWamSect79 = new char[,]
+    string nomGreatWallSect79 = "GreatWamSect79";
+    char[,] GreatWallSect79 = new char[,]
 {
     {' ', ' ', ' ', ' ', 'X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'}, //1
     {' ', ' ', ' ', ' ', ' ', 'X', 'X', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', 'X'}, //2
