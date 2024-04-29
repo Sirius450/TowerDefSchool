@@ -8,6 +8,7 @@ public class SpawningEnemy : MonoBehaviour
     [SerializeField] List<GameObject> enemyPrefab = new List<GameObject>();
     [SerializeField] int currentWave = 1;
     [SerializeField] int enemyWave = 8;
+    [SerializeField] int currentEnemy;
     [SerializeField] int maxWave = 20;
     [SerializeField] int expGain = 100;
 
@@ -17,7 +18,7 @@ public class SpawningEnemy : MonoBehaviour
     [SerializeField] float timeBetweenWave = 5f;
     [SerializeField] float reduceTimeWave = 0.02f;
     [SerializeField] float timeBetweenMap = 10f;
-    internal bool nextWave = true;
+    public bool nextWave = true;
     internal bool reset = false;
 
     [Header("player")]
@@ -34,6 +35,8 @@ public class SpawningEnemy : MonoBehaviour
 
     private void Update()
     {
+        currentEnemy = Enemy.allEnemies.Count;
+
         if (currentWave == maxWave && Enemy.allEnemies.Count == 0 && !reset)
         {
             nextWave = false;
@@ -62,15 +65,11 @@ public class SpawningEnemy : MonoBehaviour
 
     private int NextWave()
     {
-        if (nextWave)
-        {
-            player.currentExp += Mathf.RoundToInt(expGain * Mathf.Pow(currentWave, multiDificultyWave));
-            timeBetweenEnemy -= reduceTimeWave;
-            if (timeBetweenEnemy <= 0)
-            { timeBetweenEnemy = 0.1f; }
-            return Mathf.RoundToInt(enemyWave * Mathf.Pow(currentWave, multiDificultyWave));
-        }
-        return 0;
+        player.currentExp += Mathf.RoundToInt(expGain * Mathf.Pow(currentWave, multiDificultyWave));
+        timeBetweenEnemy -= reduceTimeWave;
+        if (timeBetweenEnemy <= 0)
+        { timeBetweenEnemy = 0.1f; }
+        return Mathf.RoundToInt(enemyWave * Mathf.Pow(currentWave, multiDificultyWave));
     }
 
     IEnumerator SpawnEnemyCoroutine(GameTile spawnTile)
@@ -84,6 +83,7 @@ public class SpawningEnemy : MonoBehaviour
                 yield return new WaitForSeconds(timeBetweenEnemy);
                 var enemy = Instantiate(enemyPrefab[RNGRobot()], spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
+                Debug.Log("spawn");
             }
 
 
