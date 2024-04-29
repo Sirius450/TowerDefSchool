@@ -8,7 +8,7 @@ using UnityEngine;
 public class Tourel : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Transform gatlingRotationPoint;
+    [SerializeField] private Transform RotationPoint;
 
     [Header("General")]
     [SerializeField] internal int cost = 100;
@@ -99,7 +99,7 @@ public class Tourel : MonoBehaviour
         float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        gatlingRotationPoint.rotation = Quaternion.Lerp(gatlingRotationPoint.rotation, targetRotation, rotationspeed * Time.deltaTime);
+        RotationPoint.rotation = Quaternion.Lerp(RotationPoint.rotation, targetRotation, rotationspeed * Time.deltaTime);
     }
 
 
@@ -115,6 +115,7 @@ public class Tourel : MonoBehaviour
     IEnumerator OnBomde(Enemy target)
     {
         shoot = true;
+        RotateTowardsTarget();
         var projectile = Instantiate(bomde, target.transform.position, Quaternion.identity);
         var value = projectile.GetComponent<Bomde>();
         value.SetValue(damege, explosionRange);

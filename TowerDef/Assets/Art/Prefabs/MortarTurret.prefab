@@ -47,12 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e865723466c08d44b4acb0e3a93166d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gatlingRotationPoint: {fileID: 0}
+  RotationPoint: {fileID: 4808218427379466989}
   cost: 3000
   range: 5
   minRange: 3
   reloadTime: 3
-  rotationspeed: 5
+  rotationspeed: 200
   physic: 0
   damege: 5
   AOI: 1
@@ -191,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 2697930720919138402}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.077, y: 0.094, z: 0}
+  m_LocalPosition: {x: 0.077, y: 0.0913, z: 0}
   m_LocalScale: {x: 3.9, y: 3.9, z: 3.9}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -235,9 +235,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1687505569
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 512910384, guid: 602bbb3ff35dc234ca76b1bac37bb54b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -351,8 +351,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1687505569
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 1352483157, guid: 602bbb3ff35dc234ca76b1bac37bb54b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

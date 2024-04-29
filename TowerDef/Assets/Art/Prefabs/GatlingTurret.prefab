@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e865723466c08d44b4acb0e3a93166d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gatlingRotationPoint: {fileID: 9113305246263008656}
+  RotationPoint: {fileID: 9113305246263008656}
   cost: 1000
   range: 2
   minRange: 0.01
