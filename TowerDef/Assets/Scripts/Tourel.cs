@@ -153,4 +153,27 @@ public class Tourel : MonoBehaviour
         allTourel.Remove(this);
     }
 
+    internal void OnGetRange(float effect)
+    {
+       range -= effect;
+    }
+
+    internal void OnGetPower(float effect)
+    {
+        damege += effect;
+    }
+
+    internal void OnGetRealod(float effect)
+    {
+        reloadTime -= effect;
+        reloadTime = Math.Clamp(reloadTime, 0.05f, 999f);
+    }
+
+    internal void OnGetUltimate()
+    {
+        range += 0.5f;
+        damege += 1f;
+        reloadTime -= 0.1f;
+        reloadTime = Math.Clamp(reloadTime, 0.05f, 999f);
+    }
 }

@@ -17,16 +17,19 @@ public class NodeButton : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] TMP_Text valueText;
     [SerializeField] int bonusHP = 1;
-    [SerializeField] bool actif= false;
+    [SerializeField] bool actif = false;
     [SerializeField] float effect = 0.3f;
+    [SerializeField] int expCost = 100;
     [SerializeField] bool range;
     [SerializeField] bool power;
     [SerializeField] bool realod;
+    [SerializeField] bool Ultimate;
+
 
     LineRenderer lineRenderer;
     NodeState currentState = NodeState.Unaccessible;
     List<NodeButton> children = new List<NodeButton>();
-
+    Player player;
     private void Awake()
     {
         valueText.text = $"+{bonusHP} HP";
@@ -53,6 +56,10 @@ public class NodeButton : MonoBehaviour
             }
         }
 
+        if (player == null)
+        {
+            player = GameObject.Find("Player").GetComponent<Player>();
+        }
     }
 
     private void Update()
@@ -71,13 +78,13 @@ public class NodeButton : MonoBehaviour
             currentState = NodeState.Accessible;
         }
 
-        if(actif)
+        if (actif)
         {
             currentState = NodeState.Obtained;
-        }    
+        }
     }
 
-        
+
     void SetupLine()
     {
         if (nodeLiset.Count != 0)
@@ -112,17 +119,43 @@ public class NodeButton : MonoBehaviour
         currentState = nodeState;
         switch (currentState)
         {
-            case NodeState.Obtained:  
-                actif = true;
-
-                foreach(Tourel tourel in Tourel.allTourel)
+            case NodeState.Obtained:
+                if (player.OnCheckExp(expCost))
                 {
-    
-                }
+                    actif = true;
 
-                spriteRenderer.color = Color.green;
-                foreach (var child in children)
-                    child.SetState(NodeState.Accessible);
+                    foreach (Tourel tourel in Tourel.allTourel)
+                    {
+                        if (range)
+                        {
+                            tourel.OnGetRange(effect);
+                            player.OnSpendExp(expCost);
+                        }
+                        if (power)
+                        {
+                            tourel.OnGetPower(effect);
+                            player.OnSpendExp(expCost);
+                        }
+                        if (realod)
+                        {
+                            tourel.OnGetRealod(effect);
+                            player.OnSpendExp(expCost);
+                        }
+                        if (Ultimate)
+                        {
+                            tourel.OnGetUltimate();
+                            player.OnSpendExp(expCost);
+                        }
+                    }
+
+                    spriteRenderer.color = Color.green;
+                    foreach (var child in children)
+                        child.SetState(NodeState.Accessible);
+
+                }
+                else
+                {  currentState = NodeState.Accessible; }
+
                 break;
             case NodeState.Accessible:
 
@@ -140,7 +173,7 @@ public class NodeButton : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(!actif)
+        if (!actif)
         {
             spriteRenderer.color = new Color(1, 0.75f, 0);
             foreach (var child in children)

@@ -9,6 +9,7 @@ public class SpawningEnemy : MonoBehaviour
     [SerializeField] int currentWave = 1;
     [SerializeField] int enemyWave = 8;
     [SerializeField] int maxWave = 20;
+    [SerializeField] int expGain = 100;
 
     [Header("Wave seting")]
     [SerializeField] float multiDificultyWave = 0.3f;
@@ -62,6 +63,7 @@ public class SpawningEnemy : MonoBehaviour
     {
         if (nextWave)
         {
+            player.currentExp += Mathf.RoundToInt(expGain * Mathf.Pow(currentWave, multiDificultyWave));
             timeBetweenEnemy -= reduceTimeWave;
             if (timeBetweenEnemy <= 0)
             { timeBetweenEnemy = 0.1f; }

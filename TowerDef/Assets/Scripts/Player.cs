@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,8 +6,10 @@ public class Player : MonoBehaviour
 {
     [SerializeField] TMP_Text hpText;
     [SerializeField] TMP_Text MoneyText;
+    [SerializeField] TMP_Text ExpText;
     [SerializeField] int BaseHp;
     [SerializeField] internal int currentMoney;
+    [SerializeField] internal int currentExp;
 
     public static Player Singleton;
 
@@ -29,20 +32,23 @@ public class Player : MonoBehaviour
         Debug.Log("resetMoney");
         totalHp = BaseHp + bonusHP;
         MoneyText.text = $"Money : {currentMoney}$";
+        ExpText.text = $"Exp {currentExp}";
         hpText.text = $"HP: {totalHp}"; //retirer plus tard
     }
 
 
     private void Update()
     {
-        if(hpText == null || MoneyText == null)
+        if(hpText == null || MoneyText == null || ExpText == null)
         {
-            hpText = GameObject.Find("HPBar").GetComponent<TMP_Text>();
-            MoneyText = GameObject.Find("MoneyBar").GetComponent<TMP_Text>();
+            hpText = GameObject.Find("HPBar").GetComponentInChildren<TMP_Text>();
+            MoneyText = GameObject.Find("MoneyBar").GetComponentInChildren<TMP_Text>();
+            ExpText = GameObject.Find("Exp").GetComponentInChildren<TMP_Text>();
         }
 
         hpText.text = $"HP: {totalHp}";
         MoneyText.text = $"${currentMoney}";
+        ExpText.text = $"Exp {currentExp}";
     }
 
     public void OnTakeDamege(int damege)
@@ -66,5 +72,16 @@ public class Player : MonoBehaviour
     {
         currentMoney -= money;
         currentMoney = (int)Mathf.Clamp(currentMoney, 0, 999999999);
-    }    
+    }
+
+    internal bool OnCheckExp(int expCost)
+    {
+        return currentExp - expCost >= 0;
+    }
+
+    internal void OnSpendExp(int expCost)
+    {
+        currentExp -= expCost;
+        currentExp = (int)Mathf.Clamp(currentExp, 0, 999999999);
+    }
 }
