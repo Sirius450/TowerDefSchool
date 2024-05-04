@@ -1827,7 +1827,7 @@ PrefabInstance:
       objectReference: {fileID: 203475563}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: maxWave
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3326399960889922474, guid: 355a318bd06e61043bf0b6ff2f4413b5, type: 3}
       propertyPath: reduceTimeWave
